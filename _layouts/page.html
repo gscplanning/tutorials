@@ -1,0 +1,12 @@
+---
+layout: default
+---
+
+<div class=page-header>
+    <h2>{{ page.title }}</h2>
+    {% if page.subtitle %}<small>{{ page.subtitle }}</small>{% endif %}
+</div>
+
+<i>This {{page.category}} tutorial was created by {{page.author}} on {{page.date | date: "%B %-d, %Y" }} for {{page.client}}.</i>
+
+{{ content }}

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="https://raw.githubusercontent.com/ohasselblad/workshops/master/img/favicon.ico" type="image/x-icon">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width">
+
+        <title>Hey tutorials. : Spatial Data Analysis with Policy Data</title>
+        <meta name="description" content="Little guides to mappy things and data stuffs from Ryan M Cooper">
+
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/syntax.css">
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+
+        <div class="container">
+            <div class=row-fluid>
+                <div id=header class=span12>
+                    <h4><a class=brand href="/">Hey tutorials.</a>
+    <small>Little guides to mappy things and data stuffs from Ryan M Cooper</small>
+</h4>
+
+
+                </div>
+            </div>
+
+            <div class=row-fluid>
+                
+                
+                    <div id=navigation class=span2>
+                        <ul class="nav nav-list">
+    <li class="nav-header"><a href="/">Home</a></li>
+    <li class="nav-header"><a href="/speakers.html">Speaker Resources</a></li>
+    <li class="nav-header"><a href="/events.html">List Your Event</a></li>
+    <li class="nav-header"><a href="/submit.html">Submit Material</a></li>
+    <li class="nav-header">Workshops</li>
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Data</li>
+                
+                <li class="leaf" data-order=""><a href="/data/pva-parcel-lines.html">Getting Parcel Lines</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+<!-- List additional links. It is recommended to add a divider
+    e.g. <li class=divider></li> first to break up the content. -->
+</ul>
+
+                    </div>
+
+                    <div id=content class=span10>
+                        <div class=page-header>
+    <h2>Spatial Data Analysis with Policy Data</h2>
+    <small>SIPA analysis of data from OpenNepal.net</small>
+</div>
+
+<i>This intermediate tutorial was created by Andy Eschbacher on February 3, 2015 for .</i>
+
+<h1 id="spatial-data-analysis-with-policy-data">Spatial Data Analysis with Policy Data</h1>
+
+<p>Andy Eschbacher, Map Scientist, <a href="http://cartodb.com">CartoDB</a></p>
+
+<p>Workshop, February 3rd, 2015, School of International and Policy Affairs, Columbia University</p>
+
+<p>Find this document here: http://bit.ly/cdb-sipa
+(<a href="https://gist.github.com/ohasselblad/6dc39b229c383f6e8c1c">Source code</a>)</p>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Flag_of_Nepal.svg/500px-Flag_of_Nepal.svg.png" alt="Nepal flag from Wikipedia" /></p>
+
+<h2 id="data-import">Data Import</h2>
+
+<p>To make sure we’re all on the same page, let’s import these two files into your CartoDB account.</p>
+
+<p><strong>Nepal District Polygons</strong></p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">http://andye.cartodb.com/api/v2/sql?q=SELECT%20*%20FROM%20nepal_districts2&amp;filename=nepal_districts2&amp;format=geojson</code></pre></div>
+
+<p><strong>Number of Schools in Nepal (2007-2011)</strong></p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">http://andye.cartodb.com/api/v2/sql?q=SELECT%20*%20FROM%20number_of_schools_in_nepal&amp;filename=number_of_schools_in_nepal&amp;format=geojson</code></pre></div>
+
+<p>To import, copy the URL and paste it into the Import Box in your CartoDB account. Don’t worry about downloading–it’s more efficient to just import directly through the URL. Like the Himalayas, we’re in the cloud!</p>
+
+<p><img src="../img/common/data_import_dialog.png" alt="import box" /></p>
+
+<h2 id="sql----structured-query-language">SQL – structured query language</h2>
+
+<p>CartoDB is a tool for geospatial data manipulation and visualization.</p>
+
+<p>SQL is a language for data manipulation. It has the power to manipulate geospatial data.</p>
+
+<p>SQL is a language that’s easy to learn and get a lot of power from. It might seems strange at the beginning, but once you get a handle on a couple of basic features you’ll do amazing things with your data analysis. Yes, SQL connects strongly with mapping!</p>
+
+<h3 id="basic-syntax">Basic Syntax</h3>
+
+<p>The most basic statement is:</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="k">table_name</span></code></pre></div>
+
+<p>The * means everything. This means that all rows and columns from the table are given back once the query is run.</p>
+
+<p>A more detailed query is like this:</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
+  <span class="n">name</span><span class="p">,</span>
+  <span class="n">height</span><span class="p">,</span>
+  <span class="n">age</span>
+<span class="k">FROM</span>
+  <span class="n">class_list</span>
+<span class="k">WHERE</span>
+  <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Andy&#39;</span>
+  <span class="k">AND</span> <span class="p">(</span>
+    <span class="n">height</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">.</span><span class="mi">8</span>
+    <span class="k">OR</span>
+    <span class="n">height</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">.</span><span class="mi">6</span>
+  <span class="p">)</span></code></pre></div>
+
+<ol>
+  <li><code>SELECT</code> is what you’re requesting (required)</li>
+  <li><code>FROM</code> is where the data is located (required)</li>
+  <li><code>WHERE</code> is the filter on the data you’re requesting (optional)</li>
+</ol>
+
+<p>As a sentence it reads, <em>Select the name, height, and age from a data table where the name is Andy and the height is greater than 1.8 meters or less than 1.6 meters.</em></p>
+
+<p>You can optionally add <code>LIMIT n</code> (where n is an integer &gt;= 0), which gives you only n entries, and <code>ORDER BY column_name ASC</code>, which sorts in ascending order (<code>DESC</code> is another option). You can combine them to give you the top 20 largest districts by number of schools.</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
+  <span class="n">district</span><span class="p">,</span>
+  <span class="k">year</span><span class="p">,</span>
+  <span class="n">number_of_schools</span>
+<span class="k">FROM</span>
+  <span class="n">number_of_schools_in_nepal</span>
+<span class="k">ORDER</span> <span class="k">BY</span>
+  <span class="n">number_of_schools</span>
+<span class="k">LIMIT</span>
+  <span class="mi">20</span></code></pre></div>
+
+<h3 id="thegeom-thegeomwebmercator-and-cartodbid">the_geom, the_geom_webmercator, and cartodb_id</h3>
+
+<p>There are two special columns in CartoDB:</p>
+
+<ol>
+  <li><code>the_geom</code></li>
+  <li><code>the_geom_webmercator</code></li>
+</ol>
+
+<p>The first of these is in the units of standard latitude/longitude, while the second is a projection based on the <a href="http://en.wikipedia.org/wiki/Mercator_projection">original Mercator projection</a> but <a href="http://en.wikipedia.org/wiki/Web_Mercator">optimized for the web</a>.</p>
+
+<p>If you want to run on-the-fly SQL commands and see your map update, make sure to <code>SELECT</code> the <code>the_geom_webmercator</code> because this is the column that’s used for mapping–the other is more of a convenience column since most datasets use lat/long.</p>
+
+<p>If you want to enable interaction on your maps (click events, hover boxes, etc.), you also need to <code>SELECT</code> the column called <code>cartodb_id</code>.</p>
+
+<p>For instance, the following statement will produce a map with click features:</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
+  <span class="n">the_geom_webmercator</span><span class="p">,</span>
+  <span class="n">district</span><span class="p">,</span>
+  <span class="n">cartodb_id</span>
+<span class="k">FROM</span>
+  <span class="n">nepal_districts2</span></code></pre></div>
+
+<h3 id="available-functions">Available functions</h3>
+
+<p>Once you become accustomed to the syntax, the sky will seem like the limit when processing data in this way.</p>
+
+<ul>
+  <li><a href="http://www.postgresql.org/docs/9.3/static/functions-math.html">Many mathematical functions and constants</a></li>
+  <li><a href="http://www.postgresql.org/docs/9.3/static/tutorial-sql.html">Basic tutorial on using them</a></li>
+</ul>
+
+<p>Several are <strong>aggregate functions</strong>, meaning that they need to be grouped by a certain column.</p>
+
+<p>Find the <strong>average</strong> of the number of schools over all years grouped by <strong>district</strong>:</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
+  <span class="k">avg</span><span class="p">(</span><span class="n">number_of_schools</span><span class="p">)</span> <span class="k">AS</span> <span class="n">avg_num_schools</span><span class="p">,</span>
+  <span class="n">district</span>
+<span class="k">FROM</span>
+  <span class="n">number_of_schools_in_nepal</span>
+<span class="k">GROUP</span> <span class="k">BY</span>
+  <span class="n">district</span></code></pre></div>
+
+<p>Let’s <strong>create a table</strong> from this query. To do so, click on the “create table from query” text. Rename your table to <code>avg_num_schools_nepal</code>.</p>
+
+<p>Now take a look at <code>the_geom</code> column – it’s empty. We need to find a way to get the geospatial stuff.</p>
+
+<h3 id="powerful-ways-of-combining-two-data-sets----join">Powerful ways of combining two data sets – JOIN</h3>
+
+<p>We’re working with the Nepal data, but we want to visualize it on a map. Not all of the data has explicit geographical information, so we need to find a way to get it.</p>
+
+<p>Oftentimes you want pieces from two different datasets but there’s not an obvious way of combining it in a sound way.</p>
+
+<p>Let’s look at two of our datasets: <code>avg_num_schools_nepal</code> and <code>nepal_districts2</code>.</p>
+
+<p>We could try using a geocoding service that gives us polygons based on place names, but accuracy is often a problem, especially for developing countries.</p>
+
+<p>What we can instead do is <strong>combine the needed parts</strong> from two <strong>different</strong> data sets into a new data set that’s perfect for our use.</p>
+
+<ol>
+  <li><code>nepal_districts2</code> has the geospatial component</li>
+  <li><code>avg_num_schools_nepal</code> has the information about schools that we need</li>
+</ol>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
+  <span class="n">nd</span><span class="p">.</span><span class="n">the_geom_webmercator</span><span class="p">,</span>
+  <span class="n">nd</span><span class="p">.</span><span class="n">population</span><span class="p">,</span>
+  <span class="n">ansn</span><span class="p">.</span><span class="n">district</span><span class="p">,</span>
+  <span class="n">ansn</span><span class="p">.</span><span class="n">avg_num_schools</span><span class="p">,</span>
+  <span class="n">ansn</span><span class="p">.</span><span class="n">avg_num_schools</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="n">nd</span><span class="p">.</span><span class="n">population</span> <span class="k">AS</span> <span class="n">schools_per_thousand</span><span class="p">,</span>
+  <span class="n">ansn</span><span class="p">.</span><span class="n">cartodb_id</span>
+<span class="k">FROM</span>
+  <span class="n">nepal_districts2</span> <span class="k">AS</span> <span class="n">nd</span><span class="p">,</span>
+  <span class="n">avg_num_schools_nepal</span> <span class="k">AS</span> <span class="n">ansn</span>
+<span class="k">WHERE</span>
+  <span class="n">ansn</span><span class="p">.</span><span class="n">district</span> <span class="o">=</span> <span class="n">nd</span><span class="p">.</span><span class="n">district</span></code></pre></div>
+
+<p>This is called a <code>JOIN</code>. It’s written more formally as:</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
+  <span class="n">nd</span><span class="p">.</span><span class="n">the_geom_webmercator</span><span class="p">,</span>
+  <span class="n">nd</span><span class="p">.</span><span class="n">population</span><span class="p">,</span>
+  <span class="n">ansn</span><span class="p">.</span><span class="n">district</span><span class="p">,</span>
+  <span class="n">ansn</span><span class="p">.</span><span class="n">avg_num_schools</span><span class="p">,</span>
+  <span class="n">ansn</span><span class="p">.</span><span class="n">avg_num_schools</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="n">nd</span><span class="p">.</span><span class="n">population</span> <span class="k">AS</span> <span class="n">schools_per_thousand</span><span class="p">,</span>
+  <span class="n">ansn</span><span class="p">.</span><span class="n">cartodb_id</span>
+<span class="k">FROM</span>
+  <span class="n">nepal_districts2</span> <span class="k">AS</span> <span class="n">nd</span>
+<span class="k">JOIN</span>
+  <span class="n">avg_num_schools_nepal</span> <span class="k">AS</span> <span class="n">ansn</span>
+<span class="k">ON</span>
+  <span class="n">ansn</span><span class="p">.</span><span class="n">district</span> <span class="o">=</span> <span class="n">nd</span><span class="p">.</span><span class="n">district</span></code></pre></div>
+
+<p>We can represent this as a Venn Diagram (images and inspiration from <a href="http://blog.codinghorror.com/a-visual-explanation-of-sql-joins/">this excellent blog post</a>):</p>
+
+<p><img src="http://blog.codinghorror.com/content/images/uploads/2007/10/6a0120a85dcdae970b012877702708970c-pi.png" alt="Inner Join SQL" /></p>
+
+<p>If we check out our map, though, we’ll see some <strong>districts are missing</strong>! These must represent places where no data was taken since there is not a value that corresponds to them in the school data set.</p>
+
+<p>What we want instead is a <code>JOIN</code> that keeps all of the district polygons and leaves the school number information empty–that is, lacking a value (<code>null</code> value).</p>
+
+<p>We can visualize this with a <code>LEFT JOIN</code>. The left is the Nepal district polygons, and the right is the schools data.</p>
+
+<p><img src="http://blog.codinghorror.com/content/images/uploads/2007/10/6a0120a85dcdae970b01287770273e970c-pi.png" alt="LEFT JOIN" /></p>
+
+<p>All we need to do is update our statement below with a <code>LEFT</code> keyword before <code>JOIN</code>.</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
+  <span class="n">nd</span><span class="p">.</span><span class="n">the_geom_webmercator</span><span class="p">,</span>
+  <span class="n">nd</span><span class="p">.</span><span class="n">population</span><span class="p">,</span>
+  <span class="n">ansn</span><span class="p">.</span><span class="n">district</span><span class="p">,</span>
+  <span class="n">ansn</span><span class="p">.</span><span class="n">avg_num_schools</span><span class="p">,</span>
+  <span class="n">ansn</span><span class="p">.</span><span class="n">avg_num_schools</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="n">nd</span><span class="p">.</span><span class="n">population</span> <span class="k">AS</span> <span class="n">schools_per_thousand</span><span class="p">,</span>
+  <span class="n">ansn</span><span class="p">.</span><span class="n">cartodb_id</span>
+<span class="k">FROM</span>
+  <span class="n">nepal_districts2</span> <span class="k">AS</span> <span class="n">nd</span>
+<span class="k">LEFT</span> <span class="k">JOIN</span>
+  <span class="n">avg_num_schools_nepal</span> <span class="k">AS</span> <span class="n">ansn</span>
+<span class="k">ON</span>
+  <span class="n">ansn</span><span class="p">.</span><span class="n">district</span> <span class="o">=</span> <span class="n">nd</span><span class="p">.</span><span class="n">district</span></code></pre></div>
+
+<p>Run this statement in your SQL editor and now look at your map. All the district polygons should be present.</p>
+
+<p>Now choose Choropleth to get your map styled as you like it.</p>
+
+<p><img src="../img/columbia-sipa/nepal_choropleth_avg_students.png" alt="Choropleth of Average number of schools in a district" /></p>
+
+<p>Here’s the CartoCSS that I used to style my map:</p>
+
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="c">/** choropleth visualization */</span>
+
+<span class="nf">#avg_num_schools_nepal</span><span class="p">{</span>
+  <span class="n">polygon</span><span class="o">-</span><span class="n">fill</span><span class="o">:</span> <span class="m">#FFFFB2</span><span class="p">;</span>
+  <span class="n">polygon</span><span class="o">-</span><span class="k">opacity</span><span class="o">:</span> <span class="m">0</span><span class="o">.</span><span class="m">8</span><span class="p">;</span>
+  <span class="n">line</span><span class="o">-</span><span class="k">color</span><span class="o">:</span> <span class="m">#FFF</span><span class="p">;</span>
+  <span class="n">line</span><span class="o">-</span><span class="k">width</span><span class="o">:</span> <span class="m">1</span><span class="p">;</span>
+  <span class="n">line</span><span class="o">-</span><span class="k">opacity</span><span class="o">:</span> <span class="m">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nf">#avg_num_schools_nepal</span> <span class="o">[</span> <span class="nt">schools_per_thousand</span> <span class="o">&lt;=</span> <span class="nt">5</span><span class="nc">.973241260250323</span><span class="o">]</span> <span class="p">{</span>
+   <span class="n">polygon</span><span class="o">-</span><span class="n">fill</span><span class="o">:</span> <span class="m">#B10026</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nf">#avg_num_schools_nepal</span> <span class="o">[</span> <span class="nt">schools_per_thousand</span> <span class="o">&lt;=</span> <span class="nt">2</span><span class="nc">.494266917858927</span><span class="o">]</span> <span class="p">{</span>
+   <span class="n">polygon</span><span class="o">-</span><span class="n">fill</span><span class="o">:</span> <span class="m">#E31A1C</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nf">#avg_num_schools_nepal</span> <span class="o">[</span> <span class="nt">schools_per_thousand</span> <span class="o">&lt;=</span> <span class="nt">2</span><span class="nc">.176494796872244</span><span class="o">]</span> <span class="p">{</span>
+   <span class="n">polygon</span><span class="o">-</span><span class="n">fill</span><span class="o">:</span> <span class="m">#FC4E2A</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nf">#avg_num_schools_nepal</span> <span class="o">[</span> <span class="nt">schools_per_thousand</span> <span class="o">&lt;=</span> <span class="nt">1</span><span class="nc">.886766693516458</span><span class="o">]</span> <span class="p">{</span>
+   <span class="n">polygon</span><span class="o">-</span><span class="n">fill</span><span class="o">:</span> <span class="m">#FD8D3C</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nf">#avg_num_schools_nepal</span> <span class="o">[</span> <span class="nt">schools_per_thousand</span> <span class="o">&lt;=</span> <span class="nt">1</span><span class="nc">.7310002460451854</span><span class="o">]</span> <span class="p">{</span>
+   <span class="n">polygon</span><span class="o">-</span><span class="n">fill</span><span class="o">:</span> <span class="m">#FEB24C</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nf">#avg_num_schools_nepal</span> <span class="o">[</span> <span class="nt">schools_per_thousand</span> <span class="o">&lt;=</span> <span class="nt">1</span><span class="nc">.3209913257953088</span><span class="o">]</span> <span class="p">{</span>
+   <span class="n">polygon</span><span class="o">-</span><span class="n">fill</span><span class="o">:</span> <span class="m">#FED976</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nf">#avg_num_schools_nepal</span> <span class="o">[</span> <span class="nt">schools_per_thousand</span> <span class="o">&lt;=</span> <span class="nt">0</span><span class="nc">.7697060825330803</span><span class="o">]</span> <span class="p">{</span>
+   <span class="n">polygon</span><span class="o">-</span><span class="n">fill</span><span class="o">:</span> <span class="m">#FFFFB2</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nf">#avg_num_schools_nepal</span> <span class="o">[</span> <span class="nt">schools_per_thousand</span> <span class="o">=</span> <span class="nt">null</span><span class="o">]</span> <span class="p">{</span>
+   <span class="n">polygon</span><span class="o">-</span><span class="n">fill</span><span class="o">:</span> <span class="m">#AAAAAA</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h2 id="postgis----geospatial-analysis-in-a-database">PostGIS – geospatial analysis in a database</h2>
+
+<p>Using the <code>npl_admn4</code> shapefile:</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">andye</span><span class="p">.</span><span class="n">cartodb</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v2</span><span class="o">/</span><span class="k">sql</span><span class="o">?</span><span class="n">q</span><span class="o">=</span><span class="k">SELECT</span><span class="o">%</span><span class="mi">20</span><span class="o">*%</span><span class="mi">20</span><span class="k">FROM</span><span class="o">%</span><span class="mi">20</span><span class="n">npl_adm4</span><span class="o">&amp;</span><span class="n">filename</span><span class="o">=</span><span class="n">npl_adm4</span><span class="o">&amp;</span><span class="n">format</span><span class="o">=</span><span class="n">shp</span></code></pre></div>
+
+<h3 id="stdistance">ST_Distance</h3>
+
+<p>Find the distance each adm4-level admin area is from Kathmandu.</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span>
+  <span class="n">the_geom_webmercator</span><span class="p">,</span>
+  <span class="n">ST_Distance</span><span class="p">(</span>
+    <span class="n">ST_Transform</span><span class="p">(</span>
+      <span class="n">CDB_LatLng</span><span class="p">(</span>
+        <span class="mi">27</span><span class="p">.</span><span class="mi">7089603</span><span class="p">,</span>
+        <span class="mi">85</span><span class="p">.</span><span class="mi">3261328</span><span class="p">),</span>
+      <span class="mi">3857</span><span class="p">),</span>
+    <span class="n">the_geom_webmercator</span>
+    <span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span> <span class="k">AS</span> <span class="n">d</span>
+<span class="k">FROM</span>
+  <span class="n">npl_adm4</span></code></pre></div>
+
+<p><img src="../img/columbia-sipa/st_distance_nepal.png" alt="Choropleth of distance admin 4 regions are from Kathmandu" /></p>
+
+<p>There’s lots, lots more. New Map Academy lesson going up this week on geospatial data analysis. Watch http://academy.cartodb.com for more.</p>
+
+<h3 id="intersect-count">Intersect Count</h3>
+
+<p>You can do a spatial merge of two tables. A new column called <code>intersect_count</code> will be created (if <code>COUNT</code> is chosen). This represents the number of items from one table that fall within a geometrical shape.</p>
+
+<p>Let’s find out how many items in “Projects_Level4” are within districts in <code>nepal_districts2</code>.</p>
+
+<p>First import Projects_Level4:</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">http://andye.cartodb.com/api/v2/sql?q=SELECT%20*%20FROM%20projects_level4&amp;filename=projects_level4&amp;format=shp</code></pre></div>
+
+<p>Next, go back to your table view and click on <code>nepal_districts2</code>.</p>
+
+<p><img src="../img/common/merge_tables.png" alt="merge tables" /></p>
+
+<p>Next, click on “Spatial Join”.</p>
+
+<p><img src="../img/common/spatial_join.png" alt="Spatial Join" /></p>
+
+<p>Finally, choose <code>projects_level4</code> on the right side and hit <strong>Merge tables</strong>.</p>
+
+<p>Now you can create a choropleth based on the number of items from Projects_Level4 that occurred within the districts of Nepal. Make sure to select <code>intersection_count</code> for the choropleth column.</p>
+
+<p><img src="../img/columbia-sipa/intersect_count.png" alt="Choropleth of # of intersections" /></p>
+
+<h2 id="torque----spatio-temporal-maps">Torque – spatio-temporal maps</h2>
+
+<p>Requirements:</p>
+
+<ol>
+  <li>Info in <code>the_geom</code></li>
+  <li>A time column (numeric or date type)</li>
+</ol>
+
+<p>Data sets we could use:</p>
+
+<ol>
+  <li>Number of schools</li>
+  <li>Number of voters</li>
+</ol>
+
+<p>Examples in the news:</p>
+
+<ol>
+  <li><a href="http://blog.cartodb.com/superbowl-forty-nine/">Super Bowl 49</a></li>
+  <li><a href="https://team.cartodb.com/u/andrew/viz/32ff4f28-7e51-11e4-9555-0e853d047bba/embed_map">Boston Crime</a></li>
+  <li><a href="https://srogers.cartodb.com/viz/337d9194-6458-11e3-85b5-e5e70547d141/embed_map">Beyonce Album Release</a></li>
+</ol>
+
+<h2 id="odyssey----telling-narratives-with-your-geospatial-data">Odyssey – telling narratives with your geospatial data</h2>
+
+<p><a href="http://cartodb.github.io/odyssey.js/index.html">Home page</a></p>
+
+<p>Huge revamp coming within a week or two.</p>
+
+<p>Example maps:</p>
+
+<ol>
+  <li><a href="http://alasdair.cartodb.com/viz/1332c872-a887-11e4-8c45-0e9d821ea90d/embed_map?zoom=14&amp;center_lat=55.948595&amp;center_lon=-3.199913">Tour of Scotland</a></li>
+  <li><a href="http://bl.ocks.org/anonymous/raw/7d67c4ef3348192da613/?__hstc=26280290.ab5f76548b8f08714a4e4c6c33f587e7.1421332770627.1422923447351.1422937868002.39&amp;__hssc=26280290.1.1422937868002&amp;__hsfp=144419593">HMS Beagle</a></li>
+  <li><a href="http://www.nydailynews.com/new-york/nyc-crime/bloody-weekend-19-injured-bullets-cops-arrest-2-article-1.1846552">Tour of Gun Violence in NY</a></li>
+</ol>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li><a href="http://academy.cartodb.com">Map Academy</a>
+    <ul>
+      <li><a href="http://academy.cartodb.com/courses/03-cartodbjs-ground-up/lesson-3.html">CartoDB.js</a> – build a web app to visualize your data, allowing for user interaction</li>
+      <li><a href="http://academy.cartodb.com/courses/04-sql-postgis.html">SQL and PostGIS</a></li>
+    </ul>
+  </li>
+  <li><a href="http://docs.cartodb.com/tutorials.html">Tutorials</a></li>
+  <li><a href="http://docs.cartodb.com/tips-and-tricks.html">Tips &amp; Tricks</a></li>
+  <li><a href="http://gis.stackexchange.com/questions/tagged/cartodb">Community help on StackExchange</a></li>
+</ul>
+
+<h2 id="stay-in-contact">Stay in contact</h2>
+
+<p>If you make a cool map, send it my way! <a href="https://twitter.com/MrEPhysics">@MrEPhysics</a></p>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Coat_of_arms_of_Nepal.svg/572px-Coat_of_arms_of_Nepal.svg.png" alt="Nepal Coat of Arms" /></p>
+
+
+                    </div>
+                
+            </div>
+
+            
+
+            <div class=row-fluid>
+                <div id=footer class=span12>
+                    Documentation for <a href="https://github.com/ryan-m-cooper/tutorials">Hey tutorials.</a>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function orderNav() {
+                var list,
+                    section,
+                    header,
+                    sections = [],
+                    lists = {},
+                    headers = {};
+
+                var navUl = document.querySelectorAll('#navigation ul')[0],
+                    navLis = document.querySelectorAll('#navigation ul li');
+
+                if (!navUl) return;
+
+                for (var i = 0; i < navLis.length; i++) {
+                    var order, li = navLis[i];
+
+                    if (li.classList.contains('nav-header')) {
+                        section = li.textContent || li.innerText;
+                        sections.push(section);
+                        headers[section] = li;
+                        continue;
+                    }
+
+                    if (!lists[section]) {
+                        lists[section] = [];
+                    }
+
+                    order = parseFloat(li.getAttribute('data-order'))
+                    lists[section].push([order, li]);
+                }
+
+                for (var i = 0; i < sections.length; i++) {
+                    section = sections[i];
+                    list = lists[section].sort(function(a, b) {
+                        return a[0] - b[0];
+                    });
+
+                    if (header = headers[section]) {
+                        navUl.appendChild(header);
+                    }
+                    for (var j = 0; j < list.length; j++) {
+                        navUl.appendChild(list[j][1]);
+                    }
+                }
+            }
+
+            if (document.querySelectorAll) orderNav();
+        </script>
+    </body>
+</html>

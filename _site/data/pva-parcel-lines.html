@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="https://raw.githubusercontent.com/ohasselblad/workshops/master/img/favicon.ico" type="image/x-icon">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width">
+
+        <title>Hey tutorials. : Getting Parcel Lines</title>
+        <meta name="description" content="Little guides to mappy things and data stuffs from Ryan M Cooper">
+
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/syntax.css">
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+
+        <div class="container">
+            <div class=row-fluid>
+                <div id=header class=span12>
+                    <h4><a class=brand href="/">Hey tutorials.</a>
+    <small>Little guides to mappy things and data stuffs from Ryan M Cooper</small>
+</h4>
+
+
+                </div>
+            </div>
+
+            <div class=row-fluid>
+                
+                
+                    <div id=navigation class=span2>
+                        <ul class="nav nav-list">
+    <li class="nav-header"><a href="/">Home</a></li>
+    <li class="nav-header"><a href="/speakers.html">Speaker Resources</a></li>
+    <li class="nav-header"><a href="/events.html">List Your Event</a></li>
+    <li class="nav-header"><a href="/submit.html">Submit Material</a></li>
+    <li class="nav-header">Workshops</li>
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Data</li>
+                
+                <li class="leaf" data-order=""><a href="/data/pva-parcel-lines.html">Getting Parcel Lines</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+<!-- List additional links. It is recommended to add a divider
+    e.g. <li class=divider></li> first to break up the content. -->
+</ul>
+
+                    </div>
+
+                    <div id=content class=span10>
+                        <div class=page-header>
+    <h2>Getting Parcel Lines</h2>
+    <small>How to download parcel boundaries from a qPublic site</small>
+</div>
+
+<i>This data tutorial was created by Ryan Cooper on May 24, 2015 for GSCPC.</i>
+
+<h3 id="how-to-download-parcel-boundaries-from-a-qpublic-site">How to download parcel boundaries from a qPublic site</h3>
+
+<h4 id="target-audience">Target Audience:</h4>
+<p>citizens, realtors, lawyers</p>
+
+<h4 id="objectives">Objectives:</h4>
+
+<ul>
+  <li>Search for and find a specific property on a qPublic site</li>
+  <li>Download a property’s parcel boundary from a qPublic site</li>
+</ul>
+
+<h4 id="introduction">Introduction:</h4>
+
+<p>The purpose of this little tutorial is to walk you through how to search for and download a KML version of a property’s parcel boundary through one of the more openly accessible qPublic sites. At the end of the tutorial you should have a file that you can view in Google Earth or work with in more advanced mapping programs like QGIS, ArcGIS, or CartoDB. </p>
+
+<p>For this tutorial, we’ll use the Scott County PVA’s qPublic site as the base example. That said, the process outlined here should work for Fayette and other PVAs with qPublic site where the parcel boundaries are made available for download.</p>
+
+<p><strong><a href="http://qpublic5.qpublic.net/ky_scott_accept.php">Scott County PVA site</a></strong></p>
+
+<h4 id="what-is-this-qpublic-thing">What is this qPublic thing?</h4>
+
+<p>In Kentucky, property tax assessment is handled at the county level by, for the most part, the Property Valuation Administrator (PVA). Many Kentucky counties allow some level of access to PVA data through a <a href="http://www.qpublic.net/">qPublic</a> site. qPublic sites potentially grant curious visitors access to a county’s PVA data. Counties like Fayette and Scott have largely made there PVA data available for free although most counties require what some might argue is a cost-prohibitive subscription fee. That said, through some qPublic sites, you can access not only the property data, but also the boundary lines for the parcel you’re looking for.</p>
+
+<h4 id="searching-for-a-parcel">Searching for a Parcel</h4>
+
+<p>There are several ways to search for a parcel. Search options will vary from PVA to PVA, but when you begin  your search on a qPublic site, you will be presented with a list of options similar to this:</p>
+
+<p><img src="http://i1185.photobucket.com/albums/z344/buspainter2005/tutorials/qpublic%20parcels/pva1_zpsblej795b.png" alt="qPublic search options" /></p>
+
+<p>There are a couple of different ways that your search will return results. Let’s look at them individually</p>
+
+<h5 id="search-by-owner-name-gis-map-number-location-address-description">Search by Owner Name, GIS Map Number, Location Address, Description…</h5>
+
+<p>When you do one of the above types of searches, a list of properties will be returned to. For instance, if you click <em>Search by Location Address</em> and search <strong>E Main St</strong>, you’ll get something like this:</p>
+
+<p><img src="http://i1185.photobucket.com/albums/z344/buspainter2005/tutorials/qpublic%20parcels/pva2_zpsehszrvzl.png" alt="" /></p>
+
+<p>The lsit contains some basic information about each property returned. You can select a specific property by clicking its <em>Map Number</em> or the <strong>Map It</strong> link in the <em>GIS Map</em> column. Since we want to get at the parcel boundaries, we’ll use the <strong>Map It</strong> link. In this example we’re interested in <code>230 E Main St</code>.</p>
+
+<p><img src="http://i1185.photobucket.com/albums/z344/buspainter2005/tutorials/qpublic%20parcels/pva3_zpsmtpmah0q.png" alt="" /></p>
+
+<p>Clicking <strong>Map It</strong> for your parcel of choice will take you to a map interface. We’ll delve more into that when we discuss how to actually download the parcel bounds.</p>
+
+<p><img src="http://i1185.photobucket.com/albums/z344/buspainter2005/tutorials/qpublic%20parcels/pva4_zps1wyfrjxk.png" alt="" /></p>
+
+<h5 id="search-by-map">Search by Map</h5>
+
+<p>Let’s say you know vaguely where a property is located, but the search options discussed above are coming up short. <em>Search by Map</em> allows you to interactively navigate a parcel map. A map viewer opens up showing the county at its fullest extent.</p>
+
+<p><img src="http://i1185.photobucket.com/albums/z344/buspainter2005/tutorials/qpublic%20parcels/pva5_zpsxuyaracz.png" alt="" /></p>
+
+<p>Do reduce load time, parcels aren’t drawn at this scale. You’ll need to zoom in. The map viewer toolbar has a few options for zooming in (outlined in purple).</p>
+
+<p><img src="http://i1185.photobucket.com/albums/z344/buspainter2005/tutorials/qpublic%20parcels/pva6_zpshlyozrie.png" alt="" /></p>
+
+<p>Additionally you can hold Shift + left-click, you can drag a box around an area of interest. The map will then zoom to that area.</p>
+
+<p><img src="http://i1185.photobucket.com/albums/z344/buspainter2005/tutorials/qpublic%20parcels/pva7_zpsowxvoibn.gif" alt="" /></p>
+
+<p>When you’ve found a parcel you’re interested in, click it. The parcel will become highlighted and the information pane to the right will populated with attribute information about the it.</p>
+
+<p><img src="http://i1185.photobucket.com/albums/z344/buspainter2005/tutorials/qpublic%20parcels/pva4_zps1wyfrjxk.png" alt="" /></p>
+
+<h4 id="download-a-parcel-boundary">Download a Parcel Boundary</h4>
+
+
+                    </div>
+                
+            </div>
+
+            
+
+            <div class=row-fluid>
+                <div id=footer class=span12>
+                    Documentation for <a href="https://github.com/ryan-m-cooper/tutorials">Hey tutorials.</a>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function orderNav() {
+                var list,
+                    section,
+                    header,
+                    sections = [],
+                    lists = {},
+                    headers = {};
+
+                var navUl = document.querySelectorAll('#navigation ul')[0],
+                    navLis = document.querySelectorAll('#navigation ul li');
+
+                if (!navUl) return;
+
+                for (var i = 0; i < navLis.length; i++) {
+                    var order, li = navLis[i];
+
+                    if (li.classList.contains('nav-header')) {
+                        section = li.textContent || li.innerText;
+                        sections.push(section);
+                        headers[section] = li;
+                        continue;
+                    }
+
+                    if (!lists[section]) {
+                        lists[section] = [];
+                    }
+
+                    order = parseFloat(li.getAttribute('data-order'))
+                    lists[section].push([order, li]);
+                }
+
+                for (var i = 0; i < sections.length; i++) {
+                    section = sections[i];
+                    list = lists[section].sort(function(a, b) {
+                        return a[0] - b[0];
+                    });
+
+                    if (header = headers[section]) {
+                        navUl.appendChild(header);
+                    }
+                    for (var j = 0; j < list.length; j++) {
+                        navUl.appendChild(list[j][1]);
+                    }
+                }
+            }
+
+            if (document.querySelectorAll) orderNav();
+        </script>
+    </body>
+</html>
