@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="http://i1368.photobucket.com/albums/ag172/gscplanning/logo-favicon_zpsagngw6so.png">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width">
+
+        <title>GSCPC Tutorials : Converting a shapefile into a geodatabase feature class</title>
+        <meta name="description" content="Little guides to mappy things and data stuffs from the GIS department">
+
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/syntax.css">
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+
+        <div class="container">
+            <div class=row-fluid>
+                <div id=header class=span12>
+                    <h4><a class=brand href="/">GSCPC Tutorials</a>
+    <small>Little guides to mappy things and data stuffs from the GIS department</small>
+</h4>
+
+
+                </div>
+            </div>
+
+            <div class=row-fluid>
+                
+                
+                    <div id=navigation class=span2>
+                        <ul class="nav nav-list">
+    <li class="nav-header"><a href="/">Home</a></li>
+    <li class="nav-header"><a href="/suggest.html">Suggest a Tutorial</a></li>
+    <li class="nav-header">Tutorials</li>
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Basic Mapping</li>
+                
+                <li class="leaf" data-order=""><a href="/basic-mapping/simple-parcel-map.html">Making a Simple Parcel Map</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Data</li>
+                
+                <li class="leaf" data-order=""><a href="/data/pva-parcel-lines.html">Downloading Parcel Lines</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">GIS</li>
+                
+                <li class="leaf" data-order=""><a href="/gis/shp2gdb.html">Converting a shapefile into a geodatabase feature class</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+<!-- List additional links. It is recommended to add a divider
+    e.g. <li class=divider></li> first to break up the content. -->
+</ul>
+
+                    </div>
+
+                    <div id=content class=span10>
+                        <div class=page-header>
+    <h2>Converting a shapefile into a geodatabase feature class</h2>
+    <small>Three methods using ArcGIS</small>
+</div>
+
+<i>This gis tutorial was created by Ryan Cooper on April 15, 2015 for GSCPC.</i>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+
+<ul>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#creating-a-geodatabase">Creating a geodatabase</a></li>
+  <li><a href="#converting-a-shapefile-to-a-feature-class">Converting a shapefile to a feature class</a>
+    <ul>
+      <li><a href="#via-arcmap-table-of-contents">via ArcMap <em>Table Of Contents</em></a></li>
+      <li><a href="#via-arccatalog">via ArcCatalog</a></li>
+      <li><a href="#via-feature-class-to-feature-class-tool">via <strong>Feature Class to Feature Class</strong> tool</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This little tutorial will walk you through how to convert a shapefile into a geodatabase feature class using ArcGIS. This will be broken into two larger parts:</p>
+
+<ol>
+  <li>Creating a geodatabase</li>
+  <li>Converting a shapefile into a feature class</li>
+</ol>
+
+<p>By the end, you should be able to work with your layer as a feature class in a geodatabase.</p>
+
+<h2 id="creating-a-geodatabase">Creating a geodatabase</h2>
+
+<p>When using a geodatabase it’s important to keep in mind that the geodatabase itself is just a container for data. While it has special functionality for spatial data, it serves the same purpose as any other file folder on your computer. In fact, if you look at a geodatabase outside of ArcCatalog or ArcMap it will just look like a folder on your computer.</p>
+
+<p>The data that are stored in a geodatabase are called <em>feature classes</em>. These are similar to shapefiles. What you’ll really be doing through this process is converting a shapefile to a feature class that resides in a geodatabase. But before you can do that conversion, you need a place, a geodatabase, for your feature class to be stored. In short, you need to create a geodatabase:</p>
+
+<ol>
+  <li>In ArcMap, open up the ArcCatalog pane. You can access this from the toolbar:<br />
+<img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/catalog1_zpsvqaybzkr.jpg" alt="" /></li>
+  <li>In the ArcCatalog pane, navigate to a folder where you want to store your geodatabase. In this example, I’ll be using <code>C:\temp</code>, but you can use whichever folder you’d like.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/catalog2_zpssjdt66gm.jpg" alt="" /></li>
+  <li>Right-click on the folder where you want to store your geodatabase, navigate to <strong>New&gt;File Geodatabase</strong>. Left-click <strong>File Geodatabase</strong><br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/catalog3_zpsfuqq3n14.jpg" alt="" /></li>
+  <li>You’ve created a new file geodatabase! ArcCatalog names it <strong>New File Geodatabase.gdb</strong> by default, but also gives you the option to rename it. <br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/catalog4_zpsoey15fy7.jpg" alt="" /></li>
+  <li>Give your geodatabase a name appropriate for your project. I’ll be naming mine <strong>project.gdb</strong>. (You may need to right-click and navigate to <em>Rename</em> to change the geodatabase’s name)<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/catalog5_zpswfxj2jrt.jpg" alt="" /></li>
+</ol>
+
+<p>Congratulations! You’ve successfully create a new file geodatabase. You’ll now be able to add feature classes, including those converted from existing shapefiles, to your geodatabase.</p>
+
+<h2 id="converting-a-shapefile-to-a-feature-class">Converting a shapefile to a feature class</h2>
+
+<p>Let’s walk through how to convert a shapefile into a feature class for storage in the  geodatabase you just made. There are a few ways to do this though it seems to work most reliably for me from the ArcMap <em>Table Of Contents</em>, but I’ll also outline how to get the same results from ArcCatalog and using the <strong>Feature Class to Feature Class</strong> tool, respectively.</p>
+
+<h3 id="via-arcmap-table-of-contents">via ArcMap <em>Table of Contents</em></h3>
+<p><em>This assumes you have the layer you want to convert loaded into an ArcMap project</em></p>
+
+<ol>
+  <li>Find your layer to convert in the <em>Table of Contents</em>. Right-click.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/arcmap1_zpseajn9oel.jpg" alt="" /></li>
+  <li>Navigate to <strong>Data&gt;Export Data</strong>. Left-click.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/arcmap2_zpsb6x6gx3y.jpg" alt="" /></li>
+  <li>The <em>Export Data</em> dialog box should open up. For the sake of the example we’ll leave the defaults as they are, but we need to tell Arc to export the shapefile as a feature class and into which geodatabase to place the result of the export. To start this process, left-click on the little folder button under <em>Output feature class</em>.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/arcmap3_zpsa2zfjved.jpg" alt="" /></li>
+  <li>This will bring up the <em>Saving Data</em> dialog box. At the bottom of the dialog box is an option field, <strong>Save as type</strong>. The default will likely be shapefile. You can change that by clicking the option menu (the one currently showing “Shapefile”) and selecting <strong>File and Personal Geodatabase feature class</strong>.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/arcmap4_zpsrtzedwf1.jpg" alt="" /></li>
+  <li>If the <strong>Look in</strong> field matches the folder You should see a little cannister icon and the name of your geodatabase. If not, you’ll need to navigate to the folder where your geodatabase is. Once <strong>Look in</strong> is set to the folder your geodatabase is in, double-click your geodatabase.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/arcmap5_zpsq5grg16b.jpg" alt="" /></li>
+  <li>Since you just created this geodatabase, there shouldn’t be any feature classes listed in it. Let’s change that. Look down at the <strong>Name</strong> field. It defaults to <code>Export_Output</code>. I’ll be naming the feature class <code>points</code>, but name your file something appropriate for your project. Click “Save”.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/arcmap6_zpsgmzu0xiq.jpg" alt="" /></li>
+  <li>The The <strong>Save as type</strong> dialog box will close. You should see the <strong>Export Data</strong> dialog box. Click “OK”.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/arcmap7_zpslzhjcpch.jpg" alt="" /></li>
+  <li>A dialog box will appear asking if you want to add your newly converted feature class to you map. Click “Yes” to add your feature class to the map.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/arcmap8_zpsms74dbn8.jpg" alt="" /></li>
+</ol>
+
+<p>Your shapefile has successfully been converted to a geodatabase feature class. Way to go!</p>
+
+<h3 id="via-arccatalog">via ArcCatalog</h3>
+
+<p>(This assumes you’re accessing ArcCatalog from within ArcMap. However, the process is pretty much the same in the standalone version of ArcCatalog)</p>
+
+<ol>
+  <li>In the <em>Catalog</em> pane, find the shapefile you’d like to convert into a geodatabase feature class. Right-click.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/catalog6_zpssjubm7el.jpg" alt="" /></li>
+  <li>Navigate to <strong>Export&gt;To Geodatabase (single)…</strong>. Left-click.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/catalog7_zpsxhur8gue.jpg" alt="" /></li>
+  <li>This opens the <strong>Feature Class to Feature Class</strong> tool. <strong>Input Features</strong> is already filled in with the name of the layer you want to convert.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/fc1_zpsqu63el7v.jpg" alt="" /></li>
+  <li>Set <strong>Output Location</strong> by clicking the browse button at the field’s end. When you get to the folder that contains your geodatabase, left-click the geodatabase <strong>once</strong> and click the “Add” button.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/fc2_zpszq5bxhsf.jpg" alt="" /></li>
+  <li>Set <strong>Output Feature Class</strong> to the name you want for your converted feature class<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/fc3_zpsqgzkbrts.jpg" alt="" /></li>
+</ol>
+
+<p>The new feature class layer will be added to your map. Way to go!</p>
+
+<h3 id="via-feature-class-to-feature-class-tool">via <strong>Feature Class to Feature Class</strong> tool</h3>
+
+<p>You can also access the <strong>Feature Class to Feature Class</strong> tool directly from within ArcMap.</p>
+
+<ol>
+  <li>If you don’t have the ArcToolbox pane open, open it from your toolbar<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/fc4_zps2fb6w7xs.jpg" alt="" /></li>
+  <li>In the ArcToolbox pane, navigate to <strong>Conversion Tools&gt;To Geodatabase&gt;Feature Class to Feature Class</strong>. Double-click.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/fc5_zpss0qnbcmd.jpg" alt="" /></li>
+  <li>This opens the <strong>Feature Class to Feature Class</strong> tool. For the <strong>Input Features</strong> field you need to identify the shapefile you want to convert. If your shapefile is in the <em>Table Of Contents</em> of your ArcMap project, you can select it by expanding the drop-down menu and left-clicking that layer. Otherwise, click the browse button at the field’s end. When you get to the folder that contains your shapefile, left-click the shapefile <strong>once</strong> and click the “Add” button.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/fc8_zpslspu7lat.jpg" alt="" /></li>
+  <li>Set <strong>Output Location</strong> by clicking the browse button at the field’s end. When you get to the folder that contains your geodatabase, left-click the geodatabase <strong>once</strong> and click the “Add” button.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/fc2_zpszq5bxhsf.jpg" alt="" /></li>
+  <li>Set <strong>Output Feature Class</strong> to the name you want for your converted feature class<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/shp2gdb/fc3_zpsqgzkbrts.jpg" alt="" /></li>
+</ol>
+
+<p>The new feature class layer will be added to your map automatically. Congratulations on a successful conversion!</p>
+
+
+                    </div>
+                
+            </div>
+
+            
+
+            <div class=row-fluid>
+                <div id=footer class=span12>
+                    Documentation for <a href="https://github.com/gscplanning/tutorials">GSCPC Tutorials</a>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function orderNav() {
+                var list,
+                    section,
+                    header,
+                    sections = [],
+                    lists = {},
+                    headers = {};
+
+                var navUl = document.querySelectorAll('#navigation ul')[0],
+                    navLis = document.querySelectorAll('#navigation ul li');
+
+                if (!navUl) return;
+
+                for (var i = 0; i < navLis.length; i++) {
+                    var order, li = navLis[i];
+
+                    if (li.classList.contains('nav-header')) {
+                        section = li.textContent || li.innerText;
+                        sections.push(section);
+                        headers[section] = li;
+                        continue;
+                    }
+
+                    if (!lists[section]) {
+                        lists[section] = [];
+                    }
+
+                    order = parseFloat(li.getAttribute('data-order'))
+                    lists[section].push([order, li]);
+                }
+
+                for (var i = 0; i < sections.length; i++) {
+                    section = sections[i];
+                    list = lists[section].sort(function(a, b) {
+                        return a[0] - b[0];
+                    });
+
+                    if (header = headers[section]) {
+                        navUl.appendChild(header);
+                    }
+                    for (var j = 0; j < list.length; j++) {
+                        navUl.appendChild(list[j][1]);
+                    }
+                }
+            }
+
+            if (document.querySelectorAll) orderNav();
+        </script>
+    </body>
+</html>

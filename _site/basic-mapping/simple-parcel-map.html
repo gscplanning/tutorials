@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="http://i1368.photobucket.com/albums/ag172/gscplanning/logo-favicon_zpsagngw6so.png">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width">
+
+        <title>GSCPC Tutorials : Making a Simple Parcel Map</title>
+        <meta name="description" content="Little guides to mappy things and data stuffs from the GIS department">
+
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/syntax.css">
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+
+        <div class="container">
+            <div class=row-fluid>
+                <div id=header class=span12>
+                    <h4><a class=brand href="/">GSCPC Tutorials</a>
+    <small>Little guides to mappy things and data stuffs from the GIS department</small>
+</h4>
+
+
+                </div>
+            </div>
+
+            <div class=row-fluid>
+                
+                
+                    <div id=navigation class=span2>
+                        <ul class="nav nav-list">
+    <li class="nav-header"><a href="/">Home</a></li>
+    <li class="nav-header"><a href="/suggest.html">Suggest a Tutorial</a></li>
+    <li class="nav-header">Tutorials</li>
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Basic Mapping</li>
+                
+                <li class="leaf" data-order=""><a href="/basic-mapping/simple-parcel-map.html">Making a Simple Parcel Map</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Data</li>
+                
+                <li class="leaf" data-order=""><a href="/data/pva-parcel-lines.html">Downloading Parcel Lines</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">GIS</li>
+                
+                <li class="leaf" data-order=""><a href="/gis/shp2gdb.html">Converting a shapefile into a geodatabase feature class</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+<!-- List additional links. It is recommended to add a divider
+    e.g. <li class=divider></li> first to break up the content. -->
+</ul>
+
+                    </div>
+
+                    <div id=content class=span10>
+                        <div class=page-header>
+    <h2>Making a Simple Parcel Map</h2>
+    <small>How to Make a Simple Parcel Map with Google Earth Pro</small>
+</div>
+
+<i>This basic-mapping tutorial was created by Ryan Cooper on June 1, 2015 for GSCPC.</i>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>The purpose of this tutorial is to help you make your own parcel map using parcel outlines from the Scott County PVA website and Google Earth Pro. There three major parts to this process:</p>
+
+<ol>
+  <li>Download parcel outlines from the Scott County PVA website.</li>
+  <li>Open and style the parcel outlines in Google Earth Pro.</li>
+  <li>Setup and save the map of parcel outlines in Google Earth Pro as an image.</li>
+</ol>
+
+<p>Each of these steps requires some intermediate steps so we’ll break everything down into smaller pieces.</p>
+
+<h2 id="what-youll-need">What you’ll need</h2>
+
+<ul>
+  <li>Google Earth Pro
+    <ul>
+      <li><a href="http://www.google.com/earth/download/gep/agree.html">Download</a></li>
+      <li>You may need to give Google Earth Pro an email address and a key. You should be able to just use your email address and the key <code>GEPFREE</code></li>
+    </ul>
+  </li>
+  <li>Some idea of where your properties of interest are. It might be good to know one (1) of the following things:
+    <ul>
+      <li>Address or street name</li>
+      <li>GIS Map ID number</li>
+      <li>Name of the parcel owner</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="getting-the-parcel-boundaries">Getting the parcel boundaries</h2>
+
+<ol>
+  <li>Go to the <a href="http://qpublic5.qpublic.net/ky_isearch.php?county=ky_scott">Scott County PVA site</a>
+    <ul>
+      <li>URL: <code>http://qpublic5.qpublic.net/ky_isearch.php?county=ky_scott</code></li>
+    </ul>
+  </li>
+  <li>The site gives you several options for searching for a parcel. Select the option that you have information for. <br /> <img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/pva1_zpsw5teqnrx.jpg" alt="" />
+    <ul>
+      <li><strong>Tip:</strong> <em>If you know where your parcel is, but don’t have much information about it, <code>Search by Map</code> is probably your best bet.</em></li>
+    </ul>
+  </li>
+  <li>After submitting your search, you will be presented with a list of results. Locate your the row for your parcel of interest. In the last column, <strong>GIS Map</strong>, with a link, <code>Map It</code>. Click that link. <br /> <img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/pva2_zpstddclbte.jpg" alt="" /></li>
+  <li>A map should be directed to a map with your parcel highlighted with a pinkish red outline. Make sure it’s the parcel you want! <br /> <img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/pva3_zpscst3gfaf.jpg" alt="" /></li>
+  <li>In the right pane on your screen is the Parcel Information Table. This gives you a little more information about the parcel. You have the option <strong>View as:</strong> and several map providers. Click <code>Google Earth</code>. <br /> <img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/pva4_zpstpl4gjse.jpg" alt="" /></li>
+  <li>You’ll be prompted to save a file called <code>qpublic_parcel.kml</code>. This is a file containing the boundary for your parcel! Feel free to rename it something meaningful to you and save it to a location where you’ll remember to find it. <br /> <img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/pva5_zpsilsmut0v.jpg" alt="" /></li>
+</ol>
+
+<p>Congratulations! You’ve successfully found a parcel on the Scott County PVA website and saved a KML file of its boundaries.  Unfortunately you can only select one parcel at a time so if you want to get more parcel boundaries, you’ll need to repeat the step for this section.</p>
+
+<h2 id="opening-parcels-in-google-earth-pro">Opening Parcels in Google Earth Pro</h2>
+
+<ol>
+  <li>Open Google Earth Pro. If a tip window opens up, just close it. The initial view will be a very zoomed-out globe. That’s fine! <br /> <img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep1_zpsd2s0a81e.jpg" alt="" /></li>
+  <li>In the top-left corner, navigate to File&gt;Open…. Click. <br /> <img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep2_zps27awd4jl.jpg" alt="" /></li>
+  <li>A window will pop up. If it’s not already there, navigate to the folder containing the KML file of the parcel boundary you want to add to the map. Select that file and click <strong>Open</strong>. <br /> <img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep3_zpsodmmen9g.jpg" alt="" /></li>
+  <li>The map will zoom to the location of your parcel. On the left side of your screen you should see a few panes. Look in the one called <strong>Places</strong>. You should see that your parcel has been added under <code>Temporary Places</code>.<br /> <img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep4_zps7f0vqpo6.jpg" alt="" /></li>
+</ol>
+
+<p>You’ve now added one KML parcel boundary that you downloaded from the Scott County PVA. To add more, repeat steps 1-3. The rest of the examples will assume your map shows two (2) parcels.</p>
+
+<h2 id="style-the-parcels">Style the parcels</h2>
+
+<p><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep5_zpsut96h0vd.jpg" alt="" /></p>
+
+<p>The parcels you’ve added to Google Earth Pro will come with a default style. Most likely this will be thin, white lines. Let’s change the line thickness and color.</p>
+
+<ol>
+  <li>In the <strong>Places</strong> pane (left), find the parcel you want to style. There will likely be a little right-pointing arrow next to the name of the file. Click it. This will reveal a folder called <code>QPublic Parcel</code>. There should be another little right-pointing arrow. Click that. You should then see a string of numbers and dashes. That’s the parcel’s unique identification number (GIS ID Number). You’ve arrived! <br /> <img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep6_zpstdkkftrw.gif" alt="" /></li>
+  <li>Right-click on that GIS ID Number and navigate to <strong>Properties</strong>. Click. <br /> <img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep7_zpsm1iqlnwj.jpg" alt="" /></li>
+  <li>The <strong>Edit Placemark</strong> window will pop up. You should see four (4) tabs. Click the <strong>Style, Color</strong> tab. You should see three style parameters you can change: Color, Width, and Opacity.  <br /> <img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep8_zps0od0ynfk.jpg" alt="" />
+    <ul>
+      <li><strong>Tip:</strong> <em>Try to avoid clicking on the map when the <strong>Edit Placemark</strong> window is open. If you do you might accidentally edit the shape of the boundary. If this happens, just click <strong>Cancel</strong> and go back to step 1.</em></li>
+    </ul>
+  </li>
+  <li>First, let’s change the line width. You change it by using the up and down arrows to the right of the width value or your can just type in a value directly to the <strong>Width</strong> field. The width of your parcel’s line will update automatically so you can see how your changes will look right away <br /> <img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep9_zpsf1masu01.gif" alt="" /></li>
+  <li>Next, let’s change the color. To the right of the label, <strong>Color</strong>, is a little square, or <em>patch</em>, that reflects the current color of your line. Click it. This will bring up the <strong>Choose Line Color</strong> window. Select the color you’d like for your line and click <strong>OK</strong>. <br /> <img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep10_zpswg0pn6o8.jpg" alt="" /></li>
+  <li>Double-check that your parcel’s outline width and color show up well against the aerial imagery of Google Earth Pro. If you’re pleased, click <strong>OK</strong>. <br /> <img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep11_zpscxn02kuz.jpg" alt="" /></li>
+</ol>
+
+<p>You should now have one parcel that you’ve styled yourself. If you have other parcels that you’d like to style, just repeat this section.</p>
+
+<h2 id="orienting-the-map">Orienting the map</h2>
+
+<p>Google Earth Pro is different from some other map viewers in that it gives you a lot of flexibility in terms of your map’s orientation. Viewing angle, zoom level, and the direction of north are all things you can adjust yourself. Changing any one of these can affect the other options so you might need to mess around a little bit to get the right north direction, zoom, and view angle.</p>
+
+<h3 id="adjusting-the-direction-of-north">Adjusting the direction of north.</h3>
+
+<p>In the top-right corner of your map is a little compass rose. You can click and drag the little <strong>N</strong> tag around the compass rose to change where north is on your map.</p>
+
+<p><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep12_zpsxypufwyy.gif" alt="" /></p>
+
+<h3 id="adjusting-the-zoom">Adjusting the zoom</h3>
+
+<p>If you’ve ever used Google Maps, this functions in a similar way. You can use your scroll wheel or, on the right of your screen, use the zoom-controller to slide up and down.</p>
+
+<p><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep13_zpss4ltoojt.gif" alt="" /></p>
+
+<h3 id="adjusting-the-view-angle">Adjusting the view angle</h3>
+<p>Unlike Google Maps or other web-base maps you may have seen, Google Earth allows you to view your map at angles other than 90 degrees (looking straight down). To adjust this, hold your <strong>Shift</strong> key and then click, hold and drag on your mouse to adjust the angle until you like it. Additionally, if you have a scrollwheel on your mouse, you can click, hold, and drag with it to change the view angle.</p>
+
+<p><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep14_zpsssu8yeuu.gif" alt="" /></p>
+
+<h2 id="set-up-document-for-printing">Set up document for printing</h2>
+
+<p>When you’re ready to export map to an image, you have a few options to customize the look and layout of your map. You can add/edit map elements like title and text boxes, and adjust the resolution of your map. We’ll look at editing map elements and resolution separately, but to start customizing either, you’ll need to bring up those options in Google Earth Pro.</p>
+
+<p>Along the top of your map is a tool bar with several buttons. Click the <strong>Save Image</strong> button.</p>
+
+<p><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep15_zpss04dp50c.jpg" alt="" /></p>
+
+<h3 id="map-elements">Map elements</h3>
+
+<p>Clicking <strong>Save Image</strong> will automatically add some default elements to your map. This includes the <em>Title and Description</em> (1), <em>Legend</em> (2), <em>Scale</em> (3), and <em>Compass</em> (4) elements.</p>
+
+<p><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep16_zpsdol7tstg.jpg" alt="" /></p>
+
+<p>All of these elements, as well as a general HTML area, can be toggled on and off from the <strong>Map Options</strong> menu.</p>
+
+<p><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep17_zpsxpjjayby.gif" alt="" /></p>
+
+<p>Additionally, all of these elements and the Google Earth logo can be repositioned on the map by clicking and dragging them.</p>
+
+<p><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep18_zpsdmj4it3u.gif" alt="" /></p>
+
+<p>Finally, you can give your map a custom title and description by clicking on the <em>Title and Description</em> element.</p>
+
+<p><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep19_zpsh7zjgqhm.gif" alt="" /></p>
+
+<h3 id="adjust-resolution">Adjust Resolution</h3>
+
+<p>You can adjust the size and aspect ratio of the map image in a couple of ways.</p>
+
+<ul>
+  <li>Use the preset resolutions from the <strong>Resolution</strong> menu. <br /> <img src="http://i1368.photobucket.com/albums/ag172/gscplanning/geparcelmap/gep20_zpsrvihxgni.jpg" alt="" /></li>
+  <li>Resize Google Earth Pro manually and use the <em>Current</em> setting under the <strong>Resolution</strong> menu.</li>
+</ul>
+
+<h3 id="saving-a-map-as-an-image">Saving a Map as an Image</h3>
+
+<p>Once you’re pleased with your map, it’s time to save it as an image. To do this, click <strong>Save Image</strong>. Make sure to save your map image to a folder you’ll remember.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Way to go! If you’ve made it to this point, you’ve successfully downloaded parcel boundaries from the Scott County PVA website, added those lines to Google Earth Pro, and saved your map as an image.</p>
+
+<p>If you have any questions, comments, or concerns, send those to <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#114;&#099;&#111;&#111;&#112;&#101;&#114;&#064;&#103;&#115;&#099;&#112;&#108;&#097;&#110;&#110;&#105;&#110;&#103;&#046;&#099;&#111;&#109;">&#114;&#099;&#111;&#111;&#112;&#101;&#114;&#064;&#103;&#115;&#099;&#112;&#108;&#097;&#110;&#110;&#105;&#110;&#103;&#046;&#099;&#111;&#109;</a>.</p>
+
+
+                    </div>
+                
+            </div>
+
+            
+
+            <div class=row-fluid>
+                <div id=footer class=span12>
+                    Documentation for <a href="https://github.com/gscplanning/tutorials">GSCPC Tutorials</a>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function orderNav() {
+                var list,
+                    section,
+                    header,
+                    sections = [],
+                    lists = {},
+                    headers = {};
+
+                var navUl = document.querySelectorAll('#navigation ul')[0],
+                    navLis = document.querySelectorAll('#navigation ul li');
+
+                if (!navUl) return;
+
+                for (var i = 0; i < navLis.length; i++) {
+                    var order, li = navLis[i];
+
+                    if (li.classList.contains('nav-header')) {
+                        section = li.textContent || li.innerText;
+                        sections.push(section);
+                        headers[section] = li;
+                        continue;
+                    }
+
+                    if (!lists[section]) {
+                        lists[section] = [];
+                    }
+
+                    order = parseFloat(li.getAttribute('data-order'))
+                    lists[section].push([order, li]);
+                }
+
+                for (var i = 0; i < sections.length; i++) {
+                    section = sections[i];
+                    list = lists[section].sort(function(a, b) {
+                        return a[0] - b[0];
+                    });
+
+                    if (header = headers[section]) {
+                        navUl.appendChild(header);
+                    }
+                    for (var j = 0; j < list.length; j++) {
+                        navUl.appendChild(list[j][1]);
+                    }
+                }
+            }
+
+            if (document.querySelectorAll) orderNav();
+        </script>
+    </body>
+</html>
