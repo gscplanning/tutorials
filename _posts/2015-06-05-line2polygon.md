@@ -12,6 +12,12 @@ client: 'GSCPC'
 
 You've downloaded a KML file of a parcels boundaries from the Scott County PVA. You've opened it up in Google Earth. Now you want to use that parcel either in a printed map or a web map. For many cases, you'll be fine with the KML file as you downloaded. We've shown here that you can style and create a nice looking map with the data as-is. But let's say you want to color in (or *fill*) the parcel. If you try to do that in Google Earth, you'll find that you won't be able to. Why? Because even though the parcel looks like an area, it's actually formatted as a line. In effect, the parcel is just a line with the same start and end point and conceptually there is no "inside" and thus no area to fill. However all hope is not lost! In this tutorial we'll walk through a couple of ways to turn that line into polygon that we can add some fill color.
 
+## What you'll need
+
+- A text editor
+	- If you don't have a preferred text editor, Notepad (Windows) or Text Edit (Mac) will work just fine.
+- A KML parcel boundary file ([sample data](https://raw.githubusercontent.com/gscplanning/tutorials/gh-pages/data/parcelLineString.kml))
+
 ## Peaking under the Hood
 
 For a given parcel boundary KML file, what does the data actually look like? Sure we've seen a visual representation, what does something like Google Earth read in order to turn that KML into an image? We can actually check this out!
@@ -45,11 +51,6 @@ That those two coordinates are the same means we're well set up to quickly turn 
 
 In this method we will make a small alteration to a few tags in the KML file for the parcel that will ensure that it is read as a polygon rather than a line.
 
-### What you'll need
-
-- A text editor
-	- If you don't have a preferred text editor, Notepad (Windows) or Text Edit (Mac) will work just fine3
-- A KML parcel boundary file (sample data)
 
 ### Steps
 
