@@ -21,11 +21,6 @@ In a different tutorial we looked at how we could use Google Earth Pro to quickl
 
 In this tutorial, you'll use Mapbox Editor to import existing data, create your own data, and share an interactive webmap. When you're done, you'll be ready to go out into the world and create your own informative webmaps!
 
-
-## What is Mapbox?
-
-
-
 ## What is Mapbox Editor?
 
 Mapbox Editor is a free, browser-based (read: no downloads!) tool that allows you to make simple interactive maps. With Mapbox Editor you have access to a variety of basemaps as well as the ability to both upload existing data and to draw points, lines, and areas in your map project. I this tutorial we'll learn about the features and interface of Mapbox Editor by doing, but if you'd feel more comfortable focusing in on this application, take a look at Mapbox's ["Anatomy of the Mapbox Editor"](https://www.mapbox.com/guides/editor-basics/) first.
@@ -109,7 +104,7 @@ You're almost ready to share your map. We just have a few more tweaks to make an
 3. Click the **Advanced** tab. Make sure your map is zoomed in to a level you like and your features are more or less centered within the map. Finally, if it isn't already, check **Save current map position**.<br>![](http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm35_zpskwjbaytx.jpg)
 4. Click **Save**.
 
-### Sharing your map
+## Sharing your map
 
 So far you have:
 
@@ -122,15 +117,23 @@ So far you have:
 
 Now you're ready to share. If you're not there already, navigate to the Editor toolbar and click **Project**. Make sure you're on the **Info** tab. We'll walk through two ways you can share your map with the world.
 
-#### Share directly
+### Share directly
 
-The simplest way to share your maps is its direct URL. To do this you simply need to copy the URL in the **Share** box. From here you can paste it in an email, on Facebook, or to create a link on your website. For now, open a new tab or window in your browser and paste the URL into the address bar. Press **Enter**. Now you can see the map your users will see!
+The simplest way to share your maps is its direct URL. To do this you simply need to copy the URL in the **Share** box. 
 
-![](http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm36_zpsgnagmblr.jpg)
+![](http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm37_zpsjjo2ih1e.jpg)
 
-#### Embed in a website
+From here you can paste it in an email, on Facebook, or to create a link on your website. For now, open a new tab or window in your browser and paste the URL into the address bar. Press **Enter**. Now you can see the map your users will see!
 
-Another way to share your map to make it viewable on your website. Mapbox sets you up with some boilerplate iframe code that you can copy and paste directly in your website! Just copy what's in the **Embed** box and paste it into the page you want the map to show up on. 
+[![](http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm36_zpsgnagmblr.jpg)](https://a.tiles.mapbox.com/v4/gscplanning.mi197mfk/page.html?access_token=pk.eyJ1IjoiZ3NjcGxhbm5pbmciLCJhIjoiRVZMNXpsQSJ9.5OxUlJTCDplPkdkKNlB91A#15/38.1929/-84.6899)
+
+### Embed in a website
+
+Another way to share your map to make it viewable on your website. Mapbox sets you up with some boilerplate iframe code that you can copy and paste directly in your website! Just copy what's in the **Embed** box and paste it into the page you want the map to show up on.
+
+![](http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm38_zpsjpjkynba.jpg)
+
+#### Live example of a Mapbox map embeded in a website
 
 <p data-height="776" data-theme-id="0" data-slug-hash="ZGaNOe" data-default-tab="result" data-user="gscplanning" class='codepen'>See the Pen <a href='http://codepen.io/gscplanning/pen/ZGaNOe/'>Mapbox Editor Embed Example</a> by GSC Planning (<a href='http://codepen.io/gscplanning'>@gscplanning</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
