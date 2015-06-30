@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="http://i1368.photobucket.com/albums/ag172/gscplanning/logo-favicon_zpsagngw6so.png">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width">
+
+        <title>GSCPC Tutorials : Mapping &amp; Data Tutorials from GSCPC</title>
+        <meta name="description" content="Little guides to mappy things and data stuffs from the GIS department">
+
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/tutorials/css/syntax.css">
+        <link rel="stylesheet" href="/tutorials/css/main.css">
+    </head>
+    <body>
+
+        <div class="container">
+            <div class=row-fluid>
+                <div id=header class=span12>
+                    <h4><a class=brand href="/tutorials/">GSCPC Tutorials</a>
+    <small>Little guides to mappy things and data stuffs from the GIS department</small>
+</h4>
+
+
+                </div>
+            </div>
+
+            <div class=row-fluid>
+                
+                
+                    <div id=navigation class=span2>
+                        <ul class="nav nav-list">
+    <li class="nav-header"><a href="/tutorials/">Home</a></li>
+    <li class="nav-header"><a href="/tutorials/suggest.html">Suggest a Tutorial</a></li>
+    <li class="nav-header">Tutorials</li>
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Basic Mapping</li>
+                
+                <li class="leaf" data-order=""><a href="/tutorials/basic-mapping/simple-parcel-map.html">Making a Simple Parcel Map</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Data</li>
+                
+                <li class="leaf" data-order=""><a href="/tutorials/data/pva-parcel-lines.html">Downloading Parcel Lines</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">GIS</li>
+                
+                <li class="leaf" data-order=""><a href="/tutorials/gis/shp2gdb.html">Converting a shapefile into a geodatabase feature class</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+<!-- List additional links. It is recommended to add a divider
+    e.g. <li class=divider></li> first to break up the content. -->
+</ul>
+
+                    </div>
+
+                    <div id=content class=span10>
+                        <h4 id="welcome">WELCOME!</h4>
+
+<p>We in the GIS department at GSCPC love making maps. That said, we also want to help you make your own maps! If you come across a mapping application you want to know how to use or need help getting data or imagery from a specific source, let us know and we’d be happy to help guide you through the process. We’ll post the process on this site for you and others to access whenever you need a little extra help</p>
+
+<p>If you have any questions or comments, please feel free to contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#114;&#099;&#111;&#111;&#112;&#101;&#114;&#064;&#103;&#115;&#099;&#112;&#108;&#097;&#110;&#110;&#105;&#110;&#103;&#046;&#099;&#111;&#109;&#063;&#083;&#117;&#098;&#106;&#101;&#099;&#116;&#061;&#077;&#097;&#112;&#112;&#105;&#110;&#103;&#037;&#050;&#048;&#116;&#117;&#116;&#111;&#114;&#105;&#097;&#108;&#115;">rcooper@gscplanning.com</a> or <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#105;&#115;&#064;&#103;&#115;&#099;&#112;&#108;&#097;&#110;&#110;&#105;&#110;&#103;&#046;&#099;&#111;&#109;&#063;&#083;&#117;&#098;&#106;&#101;&#099;&#116;&#061;&#077;&#097;&#112;&#112;&#105;&#110;&#103;&#037;&#050;&#048;&#116;&#117;&#116;&#111;&#114;&#105;&#097;&#108;&#115;">gis@gscplanning.com</a>.</p>
+
+<!-- <iframe width="100%" height="480px" src="workshops_map.html"></iframe> -->
+
+                    </div>
+                
+            </div>
+
+            
+
+            <div class=row-fluid>
+                <div id=footer class=span12>
+                    Documentation for <a href="https://github.com/gscplanning/tutorials">GSCPC Tutorials</a>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function orderNav() {
+                var list,
+                    section,
+                    header,
+                    sections = [],
+                    lists = {},
+                    headers = {};
+
+                var navUl = document.querySelectorAll('#navigation ul')[0],
+                    navLis = document.querySelectorAll('#navigation ul li');
+
+                if (!navUl) return;
+
+                for (var i = 0; i < navLis.length; i++) {
+                    var order, li = navLis[i];
+
+                    if (li.classList.contains('nav-header')) {
+                        section = li.textContent || li.innerText;
+                        sections.push(section);
+                        headers[section] = li;
+                        continue;
+                    }
+
+                    if (!lists[section]) {
+                        lists[section] = [];
+                    }
+
+                    order = parseFloat(li.getAttribute('data-order'))
+                    lists[section].push([order, li]);
+                }
+
+                for (var i = 0; i < sections.length; i++) {
+                    section = sections[i];
+                    list = lists[section].sort(function(a, b) {
+                        return a[0] - b[0];
+                    });
+
+                    if (header = headers[section]) {
+                        navUl.appendChild(header);
+                    }
+                    for (var j = 0; j < list.length; j++) {
+                        navUl.appendChild(list[j][1]);
+                    }
+                }
+            }
+
+            if (document.querySelectorAll) orderNav();
+        </script>
+    </body>
+</html>
