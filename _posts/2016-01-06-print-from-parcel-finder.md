@@ -2,7 +2,7 @@
 layout: page
 title: "Printing from Parcel Finder"
 subtitle: "How to print your own map from the Scott County Parcel Finder"
-category: 'webmaps', 'basic-mapping'
+category: 'webmaps'
 date: 2016-01-06 12:00:00
 author: 'Ryan Cooper'
 client: 'GSCPC'
