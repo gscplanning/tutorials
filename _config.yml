@@ -26,7 +26,8 @@ sections: [
 
 # Keep as an empty string if served up at the root. If served up at a specific
 # path (e.g. on GitHub pages) leave off the trailing slash, e.g. /my-project
-baseurl: '/tutorials'
+# baseurl: '/tutorials'
+baseurl: ''
 
 # Dates are not included in permalinks
 permalink: none
@@ -41,6 +42,8 @@ future: true
 
 # Exclude non-site files
 exclude: ['bin', 'README.md']
+
+# gems: ['jekyll-admin']
 
 # Use the redcarpet Markdown renderer
 markdown: kramdown

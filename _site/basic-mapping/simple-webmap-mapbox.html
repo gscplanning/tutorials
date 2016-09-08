@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="http://i1368.photobucket.com/albums/ag172/gscplanning/logo-favicon_zpsagngw6so.png">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width">
+
+        <title>GSCPC Tutorials : Make a Simple Webmap</title>
+        <meta name="description" content="Little guides to mappy things and data stuffs from the GIS department">
+
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/syntax.css">
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/responsive-embed.css">
+    </head>
+    <body>
+
+        <div class="container">
+            <div class=row-fluid>
+                <div id=header class=span12>
+                    <h4><a class=brand href="/">GSCPC Tutorials</a>
+    <small>Little guides to mappy things and data stuffs from the GIS department</small>
+</h4>
+
+
+                </div>
+            </div>
+
+            <div class=row-fluid>
+                
+                
+                    <div id=navigation class=span2>
+                        <ul class="nav nav-list">
+    <li class="nav-header"><a href="/">Home</a></li>
+    <li class="nav-header"><a href="/suggest.html">Suggest a Tutorial</a></li>
+    <li class="nav-header">Tutorials</li>
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Basic Mapping</li>
+                
+                <li class="leaf" data-order=""><a href="/basic-mapping/simple-webmap-mapbox.html">Make a Simple Webmap</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/basic-mapping/simple-parcel-map.html">Making a Simple Parcel Map</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Data</li>
+                
+                <li class="leaf" data-order=""><a href="/data/line2polygon.html">From line to polygon</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/data/kml2shp-web.html">Convert KML to ESRI Shapefile (web-based method)</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/data/pva-parcel-lines.html">Downloading Parcel Lines</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">GIS</li>
+                
+                <li class="leaf" data-order=""><a href="/gis/export-imagery.html">Exporting imagery to a TIFF</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/gis/shp2gdb.html">Converting a shapefile into a geodatabase feature class</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Webmaps</li>
+                
+                <li class="leaf" data-order=""><a href="/webmaps/using-the-floodplain-map.html">Using the Floodplain Map</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/webmaps/print-from-parcel-finder.html">Printing from Parcel Finder</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+<!-- List additional links. It is recommended to add a divider
+    e.g. <li class=divider></li> first to break up the content. -->
+</ul>
+
+                    </div>
+
+                    <div id=content class=span10>
+                        <div class=page-header>
+    <h2>Make a Simple Webmap</h2>
+    <small>How to make a simple, sharable webmap with Mapbox Editor</small>
+</div>
+
+<i>This basic-mapping tutorial was created by Ryan Cooper on June 1, 2015 for GSCPC.</i>
+
+<h2 id="what-do-you-need">What do you need?</h2>
+
+<ul>
+  <li><a href="https://www.mapbox.com/plans/">Mapbox account</a> - Just go for the free Starter plan</li>
+  <li><a href="https://raw.githubusercontent.com/gscplanning/tutorials/gh-pages/data/parcelLineString.kml">Sample data</a> (Right-click&gt;Save As)</li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p><a href="http://gscplanning.github.io/tutorials/basic-mapping/simple-parcel-map.html">In a different tutorial</a> we looked at how we could use Google Earth Pro to quickly make a custom, high-quality print map. While Google Earth is a fabulous tool, it has its limitations. First, you’re limited in your basemap options. You’re pretty much stuck with aerial imagery. While cool, aerial imagery can also pack way more detail than you might need for your map. Second, while Google Earth allows you to create a print or PDF map, it’s not great for making webmaps. There are better tools out there for getting you map online including <a href="https://www.google.com/mymaps">Google My Maps</a>, <a href="https://cartodb.com/">CartoDB</a>, and Mapbox Editor.</p>
+
+<h2 id="goal">Goal</h2>
+
+<p>In this tutorial, you’ll use Mapbox Editor to import existing data, create your own data, and share an interactive webmap. When you’re done, you’ll be ready to go out into the world and create your own informative webmap!</p>
+
+<h2 id="what-is-mapbox-editor">What is Mapbox Editor?</h2>
+
+<p>Mapbox Editor is a free, browser-based (read: no downloads!) tool that allows you to make simple interactive maps. With Mapbox Editor you have access to a variety of basemaps as well as the ability to both upload existing data and to draw points, lines, and areas in your map project. In this tutorial we’ll learn about the features and interface of Mapbox Editor by <em>doing</em>, but if you’d feel more comfortable focusing in on this application, do check out Mapbox’s <a href="https://www.mapbox.com/guides/editor-basics/">“Anatomy of the Mapbox Editor”</a> first.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<ol>
+  <li>Go to <a href="https://www.mapbox.com/">Mapbox.com</a> and if you’re not already, sign in to your account.</li>
+  <li>Along the navigation bar across the top of your screen there are several options for you to click. Click the <strong>Projects</strong> icon (a little folder).<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm1_zpsyioguhjm.jpg" alt="" /></li>
+  <li>You’ll be taken to your personal projects page. This where you will see all the projects you have created. Mapbox sets you up with one automatically called “My First Map.” However, we want to make a new map. Click the <strong>New Project</strong> button.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm2_zpsqsjvfgjk.jpg" alt="" /></li>
+  <li>Technically at this point you could hit <strong>Save</strong> and call it a day. You’ve already got a shareable map! But since we want to make our own unique map, we need to forge onward.</li>
+</ol>
+
+<h2 id="selecting-a-basemap">Selecting a Basemap</h2>
+
+<p>Before adding individual features to our map, it is a good idea to make sure we have a nice basemap for those features to sit on. Luckily, Editor offers several nice basemaps right out of the box.</p>
+
+<ol>
+  <li>Navigate to the Editor toolbar and click <strong>Style</strong>. You should
+see several basemap option show up, likely with <code>Streets</code> selected.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm9_zpsxyclblnl.jpg" alt="" /></li>
+  <li>Go ahead and click through and and check out the different basemaps. Zoom in on different places to see what the basemap styles look like at different scales. When you’re done exploring, select <code>Satellite Streets</code>.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm10_zpsbpibmsvp.gif" alt="" /></li>
+</ol>
+
+<h2 id="adding-and-styling-features">Adding and styling features</h2>
+
+<p>Now let’s add some features to our map. You can do this in a couple of ways:</p>
+
+<ol>
+  <li>Import data into Editor</li>
+  <li>Draw features in Editor</li>
+</ol>
+
+<p>In this section we’ll do both and then add custom styling to our features.</p>
+
+<h3 id="import--style-data">Import &amp; Style Data</h3>
+
+<p>Editor accepts a few common spatial data formats for import. These include:</p>
+
+<ul>
+  <li>GeoJSON</li>
+  <li>CSV</li>
+  <li>KML</li>
+  <li>
+    <p>GPX</p>
+
+    <blockquote>
+      <p>One common data type that is missing here is the Shapefile. You might consider using an online tool like <a href="http://ogre.adc4gis.com/">Ogre</a> or <a href="http://www.shpescape.com/">Shape Escape</a> to convert your data into GeoJSON.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>Let’s say we <a href="http://gscplanning.github.io/tutorials/data/pva-parcel-lines.html">downloaded a parcel boundary from the Scott County PVA website</a> and now want to use it in a our webmap. How would we bring it into Editor?</p>
+
+<ol>
+  <li>If you haven’t already <a href="https://raw.githubusercontent.com/gscplanning/tutorials/gh-pages/data/parcelLineString.kml">download the sample data for this tutorial</a>. It’s just a single KML file containing a single parcel’s boundary line.</li>
+  <li>You can import data through a simple drag &amp; drop with your mouse. Open up the folder containing your data. Left-click on the icon for your data. While holding that click, drag your data anywhere into Editor. If your import worked, a new window titled <em>Import features</em> will popup.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm15_zpspsib1f2n.gif" alt="" /></li>
+  <li>You have options for adding a title and description to your imported features. We’ll accept the defaults for now. Click <strong>Finish Importing</strong>.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm7_zpsx9jlulbv.jpg" alt="" /></li>
+  <li>The map should zoom to your imported data layer. Since in our case there’s only a single feature in that data, our map zooms to that individual parcel.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm16_zpsv3t6wavf.jpg" alt="" /></li>
+  <li>The default blue line is nice, but can also imply water. Let’s customize the look of the parcel boundary. Click <strong>Data</strong> in the Editor toolbar and then click the menu button,<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm4_zps8vbqlfsr.jpg" alt="" />. A dropdown window will appear listing the features you’ve added to the map. In this case you’ve only added one feature so only the parcel boundary is listed. Go ahead and click the listing for the parcel boundary<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm39_zpsgwawiblx.jpg" alt="" /></li>
+  <li>You should now see a new window with two tabs,<em>Text</em> and <em>Stroke</em>. In the <em>Text</em> tab you can add a title and some descriptive text that the user will see when they click the feature. The <em>Stroke</em> tab is for adjusting the color, opacity, and width of the line. We’ll get to adding text a little later. Go ahead leave default text and click the <em>Stroke</em> tab.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm40_zpsgvmy3es2.jpg" alt="" /></li>
+  <li>The <em>Stroke</em> tab should now be open. Here you can adjust the opacity, width, and color of the line. Take a minute to mess around with the controls to see how changing them affects your map!<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm42_zpsfcgqxati.gif" alt="" /></li>
+  <li>You can use whatever settings you want, but for the tutorial we’ll be using the following:<br /><strong>Opacity:</strong> 1<br /><strong>Thickness:</strong> 6<br /><strong>Color:</strong> red<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm43_zps9g5ryqyy.jpg" alt="" /></li>
+</ol>
+
+<p>Now you have a custom styled line. Nice work! Let’s go on to add our own features directly into the map.</p>
+
+<h3 id="create-your-own-features">Create your own features!</h3>
+
+<p>Even if you don’t have pre-made data to import, Editor allows you to add markers, lines, and polygons to represent features you want to highlight. You can then add a title, description, and custom icon to more effectively communicate with your audience.</p>
+
+<p>We want to highlight two different spots within our parcel. One is a small pond, the other a grove of trees. Let’s add a custom marker at each location!<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm44_zps3silvyy8.jpg" alt="" /></p>
+
+<ol>
+  <li>First we’ll add a marker at the small pond. Navigate to the Editor toolbar and click <strong>Data</strong><br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm18_zps713mqq5v.jpg" alt="" /></li>
+  <li>With Editor you can draw three (3) different types of shapes: <em>Markers</em>, <em>Lines</em>, and <em>Polygons</em>. We’ll use a marker to point out the location of the pond. Click <strong>Marker</strong>.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm45_zps2ss4kzqa.jpg" alt="" /></li>
+  <li>Your mouse pointer will turn into a set of cross-hairs.You may need to zoom and pan around to get the pond into view. Once you see the pond in your map, left-click where you want to place your marker. A teardrop-shaped marker should appear and a new window should drop down from the Editor toolbar.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm46_zpsfjxnhqkl.jpg" alt="" /></li>
+  <li>The window that dropped down from the Editor toolbar is where you get to customize the what users will see when they click the marker as well as the overall appearance of the marker. Along the bottom of the window are four (4) tabs where you will take care of the customization. They are <em>Text</em> (for the popup when users click), <em>Style</em> (color and size of the marker), <em>Symbol</em> (icons that can be placed within your marker), and <em>Lat/Lon</em> (coordinates of the marker in latitude/longitude). Go ahead and take a minute to click through the tabs to take a closer look at the the customization options.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm21_zpsgp1l1tkh.gif" alt="" /></li>
+  <li>Make sure you have the <strong>Text</strong> tab open. Here we can add a title for our popup and include some content. Let’s add a short descriptive title first, something like “Peaceful pond.” You’ll notice as you type, the popup on your marker will appear so you can preview your changes in real-time.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm47_zpsn3irawcu.gif" alt="" /></li>
+  <li>We can add some extra context in the <em>Description</em> box. Let’s describe our pond in a little more detail:<br /><em>A beautiful pond stocked with bass, crappie, and catfish. Located on the back of the property, this pond is a perfect getaway right in the backyard!</em><br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm48_zpsihkyezwu.jpg" alt="" /></li>
+  <li>We can even add a picture with a little html:
+    <ul>
+      <li>Template for adding image: <code>&lt;img src="path-to-image.jpg" /&gt;</code></li>
+      <li>Example: <code>&lt;img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm24_zpsqlkq06nd.jpg" /&gt;</code><br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm49_zpsmugtmvpy.jpg" alt="" /></li>
+    </ul>
+  </li>
+  <li>Now that we’ve got a nice, informative popup for our marker, let’s style the marker itself. Click the <strong>Style</strong> tab. Through this tab you can change the marker’s size<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm50_zpsnskg7bnd.gif" alt="" /><br />Let’s set our marker’s size to <em>Large</em> and color a lighter blue.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm51_zpsbkiv9vhv.jpg" alt="" /></li>
+  <li>Next, let’s add a symbol inside our marker. Click the <strong>Symbol</strong> tab. Here Mapbox provides you with a variety of symbols you can place inside your marker. Symbols are a nice way to give your user an additional visual clue about what they’re looking at! Go ahead and click through the library using the  provided ↑ and ↓ buttons.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm29_zpsuvpbdlw4.gif" alt="" /><br />Let’s add the water droplet symbol to our marker.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm52_zpsiomsadhl.jpg" alt="" />.</li>
+</ol>
+
+<p>Congratulations! You’ve successfully added a marker to your map as well as gave it a custom popup and style. Now let’s add a different marker for the grove of trees at the front of the property. If you get stuck, refer to the steps above or the animation below for help.</p>
+
+<p><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm53_zpsbvawv6uu.gif" alt="" /></p>
+
+<p>At this point, you’ll want to save your project. Hit the <strong>Save</strong> button on the toolbar.</p>
+
+<p><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm32_zps3nksnoh6.jpg" alt="" /></p>
+
+<h2 id="final-touches">Final Touches</h2>
+
+<p>You’re almost ready to share your map. We just have a few more tweaks to make and it’ll be ready for the world.</p>
+
+<ol>
+  <li>Navigate to the Editor toolbar and click <strong>Project</strong>. This will open a dropdown with three tabs: <em>Info</em>, <em>Settings</em>, and <em>Advanced</em>.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm54_zpsge4rsk9j.jpg" alt="" /></li>
+  <li>Click the <strong>Settings</strong> tab. Here you can give your map a title and a description:<br />Title: Ironworks Rd Property<br /><strong>Description:</strong> A map of features at the Ironworks Rd property.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm55_zpsot3mis82.jpg" alt="" /></li>
+  <li>Click the <strong>Advanced</strong> tab. Make sure your map is zoomed in to a level you like and your features are more or less centered within the map. Finally, if it isn’t already, check <strong>Save current map position</strong>.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm56_zps8vkfp2fd.jpg" alt="" /></li>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<h2 id="sharing-your-map">Sharing your map</h2>
+
+<p>So far you have:</p>
+
+<ul>
+  <li>Initiated a project in Mapbox Editor</li>
+  <li>Selected a basemap</li>
+  <li>Imported data</li>
+  <li>Added and styled markers</li>
+  <li>Given your map a title and description</li>
+  <li>Established where and at what zoom level the map will be at when a user opens it.</li>
+</ul>
+
+<p>Now you’re ready to share. If you’re not there already, navigate to the Editor toolbar and click <strong>Project</strong>. Make sure you’re on the <strong>Info</strong> tab. We’ll walk through two ways you can share your map with the world.</p>
+
+<h3 id="share-directly">Share directly</h3>
+
+<p>The simplest way to share your maps is its direct URL. To do this you  copy the URL in the <strong>Share</strong> box.</p>
+
+<p><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm37_zpsjjo2ih1e.jpg" alt="" /></p>
+
+<p>From here you can paste it in an email, on Facebook, or to create a link on your website. For now, open a new tab or window in your browser and paste the URL into the address bar. Press <strong>Enter</strong>. Now you can see the map your users will see!</p>
+
+<p><a href="https://a.tiles.mapbox.com/v4/gscplanning.mj68gbe4/page.html?access_token=pk.eyJ1IjoiZ3NjcGxhbm5pbmciLCJhIjoiRVZMNXpsQSJ9.5OxUlJTCDplPkdkKNlB91A#16/38.1946/-84.6899"><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm58_zps2dnq26wb.jpg" alt="" /></a></p>
+
+<h3 id="embed-in-a-website">Embed in a website</h3>
+
+<p>Another way to share your map to make it viewable on your website. Mapbox sets you up with some boilerplate iframe code that you can copy and paste directly in your website! Just copy what’s in the <strong>Embed</strong> box and paste it into the page you want the map to show up on.</p>
+
+<p><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/simple-webmap-mapbox/swm59_zpsf4fegcfb.jpg" alt="" /></p>
+
+<h4 id="live-example-of-a-mapbox-map-embeded-in-a-website">Live example of a Mapbox map embeded in a website</h4>
+
+<p data-height="776" data-theme-id="0" data-slug-hash="ZGaNOe" data-default-tab="result" data-user="gscplanning" class="codepen">See the Pen <a href="http://codepen.io/gscplanning/pen/ZGaNOe/">Mapbox Editor Embed Example</a> by GSC Planning (<a href="http://codepen.io/gscplanning">@gscplanning</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async="" src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+
+
+                    </div>
+                
+            </div>
+
+            
+
+            <div class=row-fluid>
+                <div id=footer class=span12>
+                    Documentation for <a href="https://github.com/gscplanning/tutorials">GSCPC Tutorials</a>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function orderNav() {
+                var list,
+                    section,
+                    header,
+                    sections = [],
+                    lists = {},
+                    headers = {};
+
+                var navUl = document.querySelectorAll('#navigation ul')[0],
+                    navLis = document.querySelectorAll('#navigation ul li');
+
+                if (!navUl) return;
+
+                for (var i = 0; i < navLis.length; i++) {
+                    var order, li = navLis[i];
+
+                    if (li.classList.contains('nav-header')) {
+                        section = li.textContent || li.innerText;
+                        sections.push(section);
+                        headers[section] = li;
+                        continue;
+                    }
+
+                    if (!lists[section]) {
+                        lists[section] = [];
+                    }
+
+                    order = parseFloat(li.getAttribute('data-order'))
+                    lists[section].push([order, li]);
+                }
+
+                for (var i = 0; i < sections.length; i++) {
+                    section = sections[i];
+                    list = lists[section].sort(function(a, b) {
+                        return a[0] - b[0];
+                    });
+
+                    if (header = headers[section]) {
+                        navUl.appendChild(header);
+                    }
+                    for (var j = 0; j < list.length; j++) {
+                        navUl.appendChild(list[j][1]);
+                    }
+                }
+            }
+
+            if (document.querySelectorAll) orderNav();
+        </script>
+    </body>
+</html>

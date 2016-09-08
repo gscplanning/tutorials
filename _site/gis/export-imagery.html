@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="http://i1368.photobucket.com/albums/ag172/gscplanning/logo-favicon_zpsagngw6so.png">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width">
+
+        <title>GSCPC Tutorials : Exporting imagery to a TIFF</title>
+        <meta name="description" content="Little guides to mappy things and data stuffs from the GIS department">
+
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/syntax.css">
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/responsive-embed.css">
+    </head>
+    <body>
+
+        <div class="container">
+            <div class=row-fluid>
+                <div id=header class=span12>
+                    <h4><a class=brand href="/">GSCPC Tutorials</a>
+    <small>Little guides to mappy things and data stuffs from the GIS department</small>
+</h4>
+
+
+                </div>
+            </div>
+
+            <div class=row-fluid>
+                
+                
+                    <div id=navigation class=span2>
+                        <ul class="nav nav-list">
+    <li class="nav-header"><a href="/">Home</a></li>
+    <li class="nav-header"><a href="/suggest.html">Suggest a Tutorial</a></li>
+    <li class="nav-header">Tutorials</li>
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Basic Mapping</li>
+                
+                <li class="leaf" data-order=""><a href="/basic-mapping/simple-webmap-mapbox.html">Make a Simple Webmap</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/basic-mapping/simple-parcel-map.html">Making a Simple Parcel Map</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Data</li>
+                
+                <li class="leaf" data-order=""><a href="/data/line2polygon.html">From line to polygon</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/data/kml2shp-web.html">Convert KML to ESRI Shapefile (web-based method)</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/data/pva-parcel-lines.html">Downloading Parcel Lines</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">GIS</li>
+                
+                <li class="leaf" data-order=""><a href="/gis/export-imagery.html">Exporting imagery to a TIFF</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/gis/shp2gdb.html">Converting a shapefile into a geodatabase feature class</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Webmaps</li>
+                
+                <li class="leaf" data-order=""><a href="/webmaps/using-the-floodplain-map.html">Using the Floodplain Map</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/webmaps/print-from-parcel-finder.html">Printing from Parcel Finder</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+<!-- List additional links. It is recommended to add a divider
+    e.g. <li class=divider></li> first to break up the content. -->
+</ul>
+
+                    </div>
+
+                    <div id=content class=span10>
+                        <div class=page-header>
+    <h2>Exporting imagery to a TIFF</h2>
+    <small>A way to export a subset of imagery for use in GIS and CAD programs</small>
+</div>
+
+<i>This gis tutorial was created by Ryan Cooper on August 10, 2015 for GSCPC.</i>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Sometimes you’ll find that when you’re working with imagery or raster data sets, you only want to work with a small subset of the data. Or maybe you want to share the data from a particular area of interest. Rather than use or send the entire dataset, you might just want to use a particular subset of it. In this little tutorial we’ll walk through how to use export a subset of a larger imagery file to a TIFF using both ArcGIS and QGIS. In particular, this tutorial will focus on how to export to a TIFF that is compatible with multiple applications. At the end you will have a TIFF and and a world file (.tifw) to use yourself and share with others!</p>
+
+<p>You may use your own imagery for this tutorial, but a sample dataset is available below. Make sure to download the data and unzip/extract it into a folder of your choice.</p>
+
+<p><a href="../data/sampleImagery.zip">Sample Data</a></p>
+
+<h2 id="arcgis">ArcGIS</h2>
+
+<p>First we’ll walk through how to export a subset of raster to a TIFF using ArcGIS. Before we start, you’ll need to open a blank MXD and ensure that you have made a folder connection to the imagery you’ll use for the tutorial. If you need to brush up on folder connections <a href="https://www.youtube.com/watch?v=vTSa-oYZlhg">watch this short video</a> on how to create a folder connection.</p>
+
+<p>Alright, let’s start the process of exporting some data!</p>
+
+<ol>
+  <li>Add imagery to your map. Navigate to your imagery file in the <em>Catalog</em> pane, left-click, and drag it into your map.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/export-imagery/ei1_zpswshu5rwe.gif" alt="" /></li>
+  <li>Zoom in on your imagery layer to a particular area of interest. Here we’ll zoom in on the the Scott County Courthouse.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/export-imagery/ei3_zpsaehwqk0j.gif" alt="" /></li>
+  <li>In the Table of Contents pane, right click your imagery layer and navigate to <strong>Data&gt;Export Data…</strong> and click.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/export-imagery/ei2_zpsoshaenhc.gif" alt="" /></li>
+  <li>The <em>Export Raster Data</em> window should pop up. There are several settings to choose from. Here are the key settings to make your export easily accessible to those using some thing other than ArcGIS:<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/export-imagery/ei4_zpsxj1ohxwj.gif" alt="" /><br />
+    <ul>
+      <li>Extent: Data Frame (Current)</li>
+      <li>Output Raster:
+        <ul>
+          <li>Use Renderer: unchecked</li>
+          <li>Square: checked</li>
+          <li>NoData as: 0</li>
+        </ul>
+      </li>
+      <li>Location: Click the folder button and navigate to the folder where you’d like to save your imagery</li>
+      <li>Name: Give your imagery export a name!</li>
+    </ul>
+  </li>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<p>Wait for ArcGIS to complete the export. When it’s done, you may want to add the export to your map to examine it. If you’re please, congratulations! You’ve exported imagery!</p>
+
+<h2 id="qgis">QGIS</h2>
+
+<ol>
+  <li>Add imagery to your map. Navigate to your imagery file in the <em>Browser</em> pane, left-click, and drag it into your map.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/export-imagery/ei10_zps6npxrxpm.gif" alt="" /></li>
+  <li>Zoom in on your imagery layer to a particular area of interest. Here we’ll zoom in on the the Scott County Courthouse.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/export-imagery/ei11_zpsjta7r3rl.gif" alt="" /></li>
+  <li>Let’s make sure our coordinate reference system (CRS) for our imagery is correct. In the Layers pane, right click your imagery layer and navigate to <strong>Set Layer CRS</strong>. Click. <img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/export-imagery/ei12_zps7rgxutra.gif" alt="" /></li>
+  <li>The Coordinate Reference System Selector window will open. We want our CRS to be <code>NAD83 / UTM zone 16N EPSG:26916</code> for this particular imagery. In the <em>Filter</em> field type <code>26916</code>. This is the unique identifier for our CRS. Select it below and click <strong>OK</strong><br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/export-imagery/ei13_zpscmdewsnn.gif" alt="" /></li>
+  <li>Navigate to <strong>Project&gt;Save as Image…</strong> and click.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/export-imagery/ei7_zpsehltb4rs.gif" alt="" /></li>
+  <li>Select the folder you want to save your imagery to and give it a name. Click <strong>Save</strong>. Voila! You’ve saved a subset of your imagery using QGIS.</li>
+</ol>
+
+
+
+                    </div>
+                
+            </div>
+
+            
+
+            <div class=row-fluid>
+                <div id=footer class=span12>
+                    Documentation for <a href="https://github.com/gscplanning/tutorials">GSCPC Tutorials</a>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function orderNav() {
+                var list,
+                    section,
+                    header,
+                    sections = [],
+                    lists = {},
+                    headers = {};
+
+                var navUl = document.querySelectorAll('#navigation ul')[0],
+                    navLis = document.querySelectorAll('#navigation ul li');
+
+                if (!navUl) return;
+
+                for (var i = 0; i < navLis.length; i++) {
+                    var order, li = navLis[i];
+
+                    if (li.classList.contains('nav-header')) {
+                        section = li.textContent || li.innerText;
+                        sections.push(section);
+                        headers[section] = li;
+                        continue;
+                    }
+
+                    if (!lists[section]) {
+                        lists[section] = [];
+                    }
+
+                    order = parseFloat(li.getAttribute('data-order'))
+                    lists[section].push([order, li]);
+                }
+
+                for (var i = 0; i < sections.length; i++) {
+                    section = sections[i];
+                    list = lists[section].sort(function(a, b) {
+                        return a[0] - b[0];
+                    });
+
+                    if (header = headers[section]) {
+                        navUl.appendChild(header);
+                    }
+                    for (var j = 0; j < list.length; j++) {
+                        navUl.appendChild(list[j][1]);
+                    }
+                }
+            }
+
+            if (document.querySelectorAll) orderNav();
+        </script>
+    </body>
+</html>

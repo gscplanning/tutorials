@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="http://i1368.photobucket.com/albums/ag172/gscplanning/logo-favicon_zpsagngw6so.png">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width">
+
+        <title>GSCPC Tutorials : From line to polygon</title>
+        <meta name="description" content="Little guides to mappy things and data stuffs from the GIS department">
+
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/syntax.css">
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/responsive-embed.css">
+    </head>
+    <body>
+
+        <div class="container">
+            <div class=row-fluid>
+                <div id=header class=span12>
+                    <h4><a class=brand href="/">GSCPC Tutorials</a>
+    <small>Little guides to mappy things and data stuffs from the GIS department</small>
+</h4>
+
+
+                </div>
+            </div>
+
+            <div class=row-fluid>
+                
+                
+                    <div id=navigation class=span2>
+                        <ul class="nav nav-list">
+    <li class="nav-header"><a href="/">Home</a></li>
+    <li class="nav-header"><a href="/suggest.html">Suggest a Tutorial</a></li>
+    <li class="nav-header">Tutorials</li>
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Basic Mapping</li>
+                
+                <li class="leaf" data-order=""><a href="/basic-mapping/simple-webmap-mapbox.html">Make a Simple Webmap</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/basic-mapping/simple-parcel-map.html">Making a Simple Parcel Map</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Data</li>
+                
+                <li class="leaf" data-order=""><a href="/data/line2polygon.html">From line to polygon</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/data/kml2shp-web.html">Convert KML to ESRI Shapefile (web-based method)</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/data/pva-parcel-lines.html">Downloading Parcel Lines</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">GIS</li>
+                
+                <li class="leaf" data-order=""><a href="/gis/export-imagery.html">Exporting imagery to a TIFF</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/gis/shp2gdb.html">Converting a shapefile into a geodatabase feature class</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Webmaps</li>
+                
+                <li class="leaf" data-order=""><a href="/webmaps/using-the-floodplain-map.html">Using the Floodplain Map</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/webmaps/print-from-parcel-finder.html">Printing from Parcel Finder</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+<!-- List additional links. It is recommended to add a divider
+    e.g. <li class=divider></li> first to break up the content. -->
+</ul>
+
+                    </div>
+
+                    <div id=content class=span10>
+                        <div class=page-header>
+    <h2>From line to polygon</h2>
+    <small>Some methods for converting those polygon-looking lines from the PVA into the polygons they should be!</small>
+</div>
+
+<i>This data tutorial was created by Ryan Cooper on June 5, 2015 for GSCPC.</i>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>You’ve downloaded a KML file of a parcels boundaries from the Scott County PVA. You’ve opened it up in Google Earth. Now you want to use that parcel either in a printed map or a web map. For many cases, you’ll be fine with the KML file as you downloaded. We’ve shown here that you can style and create a nice looking map with the data as-is. But let’s say you want to color in (or <em>fill</em>) the parcel. If you try to do that in Google Earth, you’ll find that you won’t be able to. Why? Because even though the parcel looks like an area, it’s actually formatted as a line. In effect, the parcel is just a line with the same start and end point and conceptually there is no “inside” and thus no area to fill. However all hope is not lost! In this tutorial we’ll walk through a couple of ways to turn that line into polygon that we can add some fill color.</p>
+
+<h2 id="what-youll-need">What you’ll need</h2>
+
+<ul>
+  <li>A text editor
+    <ul>
+      <li>If you don’t have a preferred text editor, Notepad (Windows) or Text Edit (Mac) will work just fine.</li>
+    </ul>
+  </li>
+  <li>A KML parcel boundary file (<a href="https://raw.githubusercontent.com/gscplanning/tutorials/gh-pages/data/parcelLineString.kml">sample data</a>)</li>
+</ul>
+
+<h2 id="peaking-under-the-hood">Peaking under the Hood</h2>
+
+<p>For a given parcel boundary KML file, what does the data actually look like? Sure we’ve seen a visual representation, what does something like Google Earth read in order to turn that KML into an image? We can actually check this out!</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;kml xmlns="http://www.opengis.net/kml/2.2"&gt;
+	&lt;Document&gt;	
+		&lt;Folder&gt;
+			&lt;name&gt;QPublic Parcel&lt;/name&gt;
+			&lt;Placemark&gt;
+				&lt;name&gt;044-00-021.000&lt;/name&gt;
+				&lt;MultiGeometry&gt;
+					&lt;LineString&gt;
+						&lt;coordinates&gt;-84.687180,38.198642,0 -84.683888,38.197461,0 -84.685064,38.195384,0 -84.685871,38.194309,0 -84.687184,38.194839,0 -84.687743,38.193811,0 -84.688857,38.191849,0 -84.686394,38.191266,0 -84.688708,38.187197,0 -84.695844,38.189434,0 -84.695553,38.189947,0 -84.694463,38.192229,0 -84.693451,38.194158,0 -84.691641,38.197945,0 -84.689744,38.197283,0 -84.689157,38.198375,0 -84.688009,38.197974,0 -84.687619,38.197832,0 -84.687180,38.198642,0&lt;/coordinates&gt;
+					&lt;/LineString&gt;
+				&lt;/MultiGeometry&gt;
+			&lt;/Placemark&gt;	
+		&lt;/Folder&gt;
+	&lt;/Document&gt;
+&lt;/kml&gt;
+</code></pre>
+
+<p>This may look a little scary, but never fear! See where the dual tags <code>&lt;LineString&gt;...&lt;/LineString&gt;</code>? <code>&lt;LineString&gt;</code> is basically synonymous with <em>line</em> and when Google Earth sees that it knows that the values between the <code>&lt;coordinates&gt;...&lt;/coordinates&gt;</code> tags should be read as a line.</p>
+
+<p>Now let’s look at what’s between <code>&lt;coordinates&gt;...&lt;/coordinates&gt;</code>. You should see a bunch of trios of comma-separated values. Those values represent the longitude, latitude, and altitude, respectively of each vertex in the parcel boundary. Notice that the first coordinate and last one are the same:</p>
+
+<pre><code>&lt;coordinates&gt;-84.687180,38.198642,0 ... -84.687180,38.198642,0&lt;/coordinates&gt;'
+</code></pre>
+
+<p>That those two coordinates are the same means we’re well set up to quickly turn this line. This leads us to our first method.</p>
+
+<h2 id="method-1-kml-surgery">Method 1: KML Surgery</h2>
+
+<p>In this method we will make a small alteration to a few tags in the KML file for the parcel that will ensure that it is read as a polygon rather than a line.</p>
+
+<h3 id="steps">Steps</h3>
+
+<ol>
+  <li>Open up your preferred text editor.</li>
+  <li>Navigate to <em>File&gt;Open</em>. Find your parcel, single-click it, and click <strong>Open</strong>.
+    <ul>
+      <li>Note: You may find when you navigate to the directory holding your KML file, it doesn’t show up. Sometimes programs will look for a default file format. There is a menu in your <em>Open</em> window that allows you to select which file type to filter for. Click that menu and select “All Files”<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/line2polygon/poly1_zpssk9mys6p.gif" alt="" /></li>
+    </ul>
+  </li>
+  <li>Replace <code>&lt;LineString&gt;</code> with <code>&lt;Polygon&gt;&lt;outerBoundaryIs&gt;&lt;LinearRing&gt;</code> as well as <code>&lt;/LineString&gt;</code> with <code>&lt;/LinearRing&gt;&lt;/outerBoundaryIs&gt;&lt;/Polygon&gt;</code><br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/line2polygon/poly2_zps9vlvuw9g.gif" alt="" /></li>
+  <li>Save. Your parcel boundary is now a polygon!</li>
+</ol>
+
+<h2 id="method-2-moving-on-to-geojson">Method 2: Moving on to GeoJSON</h2>
+
+<p>In this method we will both turn our parcel boundary into polygon and convert to GeoJSON. You might want to use this method if you’re going to make a webmap or want to add additional attribute information. We’ll use a cool browser-based application called <a href="http://geojson.io/">geojson.io</a>.</p>
+
+<ol>
+  <li>In your browser navigate to <a href="http://geojson.io/">geojson.io</a>. You should be presented with two-column interface with a map on the left and editor on the right.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/line2polygon/poly3_zpsvlli4bp1.jpg" alt="" /></li>
+  <li>Navigate to <em>Open&gt;File</em>. Click.</li>
+  <li>The <em>Open</em> window opens up. Navigate to the directory where your parcel file is located, single-click the file, and click <strong>Open</strong>.</li>
+  <li>Your parcel will be show in the left map pane. When you loaded your KML file, it was converted into GeoJSON. That’s the text you see in the right pane.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/line2polygon/poly4_zpsa6qlxzrj.jpg" alt="" /></li>
+  <li>Notice there is property <code>"type": "LineString"</code>. Change <code>"LineString"</code> to <code>"Polygon"</code>.You may see some little red warning symbols pop up next to the line numbers. We’ll address that next.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/line2polygon/poly5_zpsdnudeh48.gif" alt="" /></li>
+  <li>Add a <code>[</code> after <code>"coordinates": </code>, but before the first <code>[</code> already there. Add a closing <code>]</code> before the closing <code>}</code> prior to <code>"properties":...</code><br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/line2polygon/poly6_zps5rcaubps.gif" alt="" /></li>
+  <li>Your parcel is now a polygon! Navigate to Save and select the file format - GeoJSON, KML, or otherwise - you want to save your file as.</li>
+</ol>
+
+
+
+                    </div>
+                
+            </div>
+
+            
+
+            <div class=row-fluid>
+                <div id=footer class=span12>
+                    Documentation for <a href="https://github.com/gscplanning/tutorials">GSCPC Tutorials</a>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function orderNav() {
+                var list,
+                    section,
+                    header,
+                    sections = [],
+                    lists = {},
+                    headers = {};
+
+                var navUl = document.querySelectorAll('#navigation ul')[0],
+                    navLis = document.querySelectorAll('#navigation ul li');
+
+                if (!navUl) return;
+
+                for (var i = 0; i < navLis.length; i++) {
+                    var order, li = navLis[i];
+
+                    if (li.classList.contains('nav-header')) {
+                        section = li.textContent || li.innerText;
+                        sections.push(section);
+                        headers[section] = li;
+                        continue;
+                    }
+
+                    if (!lists[section]) {
+                        lists[section] = [];
+                    }
+
+                    order = parseFloat(li.getAttribute('data-order'))
+                    lists[section].push([order, li]);
+                }
+
+                for (var i = 0; i < sections.length; i++) {
+                    section = sections[i];
+                    list = lists[section].sort(function(a, b) {
+                        return a[0] - b[0];
+                    });
+
+                    if (header = headers[section]) {
+                        navUl.appendChild(header);
+                    }
+                    for (var j = 0; j < list.length; j++) {
+                        navUl.appendChild(list[j][1]);
+                    }
+                }
+            }
+
+            if (document.querySelectorAll) orderNav();
+        </script>
+    </body>
+</html>

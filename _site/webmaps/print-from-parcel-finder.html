@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="http://i1368.photobucket.com/albums/ag172/gscplanning/logo-favicon_zpsagngw6so.png">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width">
+
+        <title>GSCPC Tutorials : Printing from Parcel Finder</title>
+        <meta name="description" content="Little guides to mappy things and data stuffs from the GIS department">
+
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/syntax.css">
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/responsive-embed.css">
+    </head>
+    <body>
+
+        <div class="container">
+            <div class=row-fluid>
+                <div id=header class=span12>
+                    <h4><a class=brand href="/">GSCPC Tutorials</a>
+    <small>Little guides to mappy things and data stuffs from the GIS department</small>
+</h4>
+
+
+                </div>
+            </div>
+
+            <div class=row-fluid>
+                
+                
+                    <div id=navigation class=span2>
+                        <ul class="nav nav-list">
+    <li class="nav-header"><a href="/">Home</a></li>
+    <li class="nav-header"><a href="/suggest.html">Suggest a Tutorial</a></li>
+    <li class="nav-header">Tutorials</li>
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Basic Mapping</li>
+                
+                <li class="leaf" data-order=""><a href="/basic-mapping/simple-webmap-mapbox.html">Make a Simple Webmap</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/basic-mapping/simple-parcel-map.html">Making a Simple Parcel Map</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Data</li>
+                
+                <li class="leaf" data-order=""><a href="/data/line2polygon.html">From line to polygon</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/data/kml2shp-web.html">Convert KML to ESRI Shapefile (web-based method)</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/data/pva-parcel-lines.html">Downloading Parcel Lines</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">GIS</li>
+                
+                <li class="leaf" data-order=""><a href="/gis/export-imagery.html">Exporting imagery to a TIFF</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/gis/shp2gdb.html">Converting a shapefile into a geodatabase feature class</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+             
+                
+                    <li class="inner">Webmaps</li>
+                
+                <li class="leaf" data-order=""><a href="/webmaps/using-the-floodplain-map.html">Using the Floodplain Map</a></li>
+             
+                
+                <li class="leaf" data-order=""><a href="/webmaps/print-from-parcel-finder.html">Printing from Parcel Finder</a></li>
+            
+        
+        
+    
+         
+         
+            
+            
+
+            
+        
+        
+    
+<!-- List additional links. It is recommended to add a divider
+    e.g. <li class=divider></li> first to break up the content. -->
+</ul>
+
+                    </div>
+
+                    <div id=content class=span10>
+                        <div class=page-header>
+    <h2>Printing from Parcel Finder</h2>
+    <small>How to print your own map from the Scott County Parcel Finder</small>
+</div>
+
+<i>This webmaps tutorial was created by Ryan Cooper on January 6, 2016 for GSCPC.</i>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>You’re looking at an area on the Scott County Parcel Finder and would like to have a static or hard copy version. What do you do? In this little tutorial we’ll walk through how to get your map set up for printing and then how to actually get it printed.</p>
+
+<h2 id="set-up-your-map">Set up your map</h2>
+
+<ol>
+  <li>Navigate to the <a href="http://gscgis.maps.arcgis.com/apps/Solutions/s2.html?appid=8062c4ef303049c3af50036ddab3c8c7">Scott County Parcel Finder</a>. The URL for this app is a little crazy so you might want to just bookmark it for later reference.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/print-from-parcel-finder/00_print1_zpslmnmqgri.png" alt="" /><br /><strong>Map URL:</strong> <a href="http://gscgis.maps.arcgis.com/apps/Solutions/s2.html?appid=8062c4ef303049c3af50036ddab3c8c7">http://gscgis.maps.arcgis.com/apps/Solutions/s2.html?appid=8062c4ef303049c3af50036ddab3c8c7</a></li>
+  <li>Take a look at the bar along the top, focusing on the icons on the right side. These icons are actually buttons that help you tap extra functionality in the map. From left to right, these buttons let you search for a parcel, change the basemap, share the map (email, Facebook, or Twitter), print the current map view, and read a little more information about the map itself.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/print-from-parcel-finder/00_print2_zpsviydb6ul.png" alt="" /></li>
+  <li>Let’s say we have an address for which we want to print a map. We can use the search tool to zoom to that location. In this case we’ll use <code>230 E Main St</code> in Georgetown. Click the <strong>Search</strong> icon. A little window will open up with a text field. Type the address into the text field. You’ll notice as you type that search tool will present you with possible matches to what you’re typing. When you see a result you’re pleased with, click it.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/print-from-parcel-finder/00_print3_zpsmcmsrmjx.gif" alt="" /></li>
+  <li>Using your mouse, adjust the map to your preference. You can left-click + drag to move the map around. Use your scroll wheel or +/- buttons in the top-left corner of the map to zoom in and out. You’ll want to make sure the most important part of the map is in the center of the screen as the dimensions of the printed map are preset and may not match the dimensions of your browser window. In the case of our example, we’ll left-click and drag 230 E Main St to the center of the browser window and zoom in a little.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/print-from-parcel-finder/00_print4_zpsycrkhodc.gif" alt="" /></li>
+</ol>
+
+<h2 id="print-your-map">Print your map</h2>
+
+<ol>
+  <li>Click on the print icon in the top bar of the map. This will open a little window that gives you options for page orientation, title, author, and the command to print.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/print-from-parcel-finder/00_print5_zpsoftozegz.png" alt="" /></li>
+  <li>Select your orientation preference (landscape or portrait). If you want, type in a title and author. These fields are optional but it is a good practice to include this information so you and others know what the focus of the map is and who created it. For our example, we’ll produce a <code>portrait</code> oriented map entitled <code>230 E Main St</code> and authored by <code>GSCPC</code>.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/print-from-parcel-finder/00_print6_zpsojitksms.png" alt="" /></li>
+  <li>Take a final look at your map. If it looks good, click the print icon within the little print window.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/print-from-parcel-finder/00_print7_zpszdcottrj.png" alt="" /></li>
+  <li>What you may be expecting is a window associated with your printer to open. This is not be the case. Instead, a new window or tab should open up in your browser. In it is a PDF version of your map. Congrats! You’ve successfully generated a static map from the Parcel Finder!<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/print-from-parcel-finder/00_print8_zpsaye5jfys.png" alt="" /></li>
+  <li>Now you probably want to save the PDF map to your computer and/or print it out on a piece of 8.5” x 11” paper. Depending on your browser you may have some buttons available that allow you to print and save. If you don’t see them, you should be able to access print and save functionality by right-clicking the PDF map. A menu should pop up with options to <strong>Save</strong> and/or <strong>Save as…</strong> as well as <strong>Print…</strong>.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/print-from-parcel-finder/00_print9_zps69htuhuz.png" alt="" /></li>
+</ol>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In this tutorial we looked at how to set up and create a printable PDF map from the Scott County Parcel Finder using the print options within the app itself. If you have any questions or corrections, feel free to let us know!</p>
+
+
+
+                    </div>
+                
+            </div>
+
+            
+
+            <div class=row-fluid>
+                <div id=footer class=span12>
+                    Documentation for <a href="https://github.com/gscplanning/tutorials">GSCPC Tutorials</a>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function orderNav() {
+                var list,
+                    section,
+                    header,
+                    sections = [],
+                    lists = {},
+                    headers = {};
+
+                var navUl = document.querySelectorAll('#navigation ul')[0],
+                    navLis = document.querySelectorAll('#navigation ul li');
+
+                if (!navUl) return;
+
+                for (var i = 0; i < navLis.length; i++) {
+                    var order, li = navLis[i];
+
+                    if (li.classList.contains('nav-header')) {
+                        section = li.textContent || li.innerText;
+                        sections.push(section);
+                        headers[section] = li;
+                        continue;
+                    }
+
+                    if (!lists[section]) {
+                        lists[section] = [];
+                    }
+
+                    order = parseFloat(li.getAttribute('data-order'))
+                    lists[section].push([order, li]);
+                }
+
+                for (var i = 0; i < sections.length; i++) {
+                    section = sections[i];
+                    list = lists[section].sort(function(a, b) {
+                        return a[0] - b[0];
+                    });
+
+                    if (header = headers[section]) {
+                        navUl.appendChild(header);
+                    }
+                    for (var j = 0; j < list.length; j++) {
+                        navUl.appendChild(list[j][1]);
+                    }
+                }
+            }
+
+            if (document.querySelectorAll) orderNav();
+        </script>
+    </body>
+</html>
