@@ -34,7 +34,7 @@ permalink: none
 
 # Syntax highlighting
 # highlighter: rouge
-highlighter: pygments
+highlighter: rouge
 
 
 # Since these are pages, it doesn't really matter

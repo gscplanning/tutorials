@@ -158,30 +158,32 @@
 
 <p>For a given parcel boundary KML file, what does the data actually look like? Sure we’ve seen a visual representation, what does something like Google Earth read in order to turn that KML into an image? We can actually check this out!</p>
 
-<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;kml xmlns="http://www.opengis.net/kml/2.2"&gt;
-	&lt;Document&gt;	
-		&lt;Folder&gt;
-			&lt;name&gt;QPublic Parcel&lt;/name&gt;
-			&lt;Placemark&gt;
-				&lt;name&gt;044-00-021.000&lt;/name&gt;
-				&lt;MultiGeometry&gt;
-					&lt;LineString&gt;
-						&lt;coordinates&gt;-84.687180,38.198642,0 -84.683888,38.197461,0 -84.685064,38.195384,0 -84.685871,38.194309,0 -84.687184,38.194839,0 -84.687743,38.193811,0 -84.688857,38.191849,0 -84.686394,38.191266,0 -84.688708,38.187197,0 -84.695844,38.189434,0 -84.695553,38.189947,0 -84.694463,38.192229,0 -84.693451,38.194158,0 -84.691641,38.197945,0 -84.689744,38.197283,0 -84.689157,38.198375,0 -84.688009,38.197974,0 -84.687619,38.197832,0 -84.687180,38.198642,0&lt;/coordinates&gt;
-					&lt;/LineString&gt;
-				&lt;/MultiGeometry&gt;
-			&lt;/Placemark&gt;	
-		&lt;/Folder&gt;
-	&lt;/Document&gt;
-&lt;/kml&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;kml</span> <span class="na">xmlns=</span><span class="s">"http://www.opengis.net/kml/2.2"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;Document&gt;</span>	
+		<span class="nt">&lt;Folder&gt;</span>
+			<span class="nt">&lt;name&gt;</span>QPublic Parcel<span class="nt">&lt;/name&gt;</span>
+			<span class="nt">&lt;Placemark&gt;</span>
+				<span class="nt">&lt;name&gt;</span>044-00-021.000<span class="nt">&lt;/name&gt;</span>
+				<span class="nt">&lt;MultiGeometry&gt;</span>
+					<span class="nt">&lt;LineString&gt;</span>
+						<span class="nt">&lt;coordinates&gt;</span>-84.687180,38.198642,0 -84.683888,38.197461,0 -84.685064,38.195384,0 -84.685871,38.194309,0 -84.687184,38.194839,0 -84.687743,38.193811,0 -84.688857,38.191849,0 -84.686394,38.191266,0 -84.688708,38.187197,0 -84.695844,38.189434,0 -84.695553,38.189947,0 -84.694463,38.192229,0 -84.693451,38.194158,0 -84.691641,38.197945,0 -84.689744,38.197283,0 -84.689157,38.198375,0 -84.688009,38.197974,0 -84.687619,38.197832,0 -84.687180,38.198642,0<span class="nt">&lt;/coordinates&gt;</span>
+					<span class="nt">&lt;/LineString&gt;</span>
+				<span class="nt">&lt;/MultiGeometry&gt;</span>
+			<span class="nt">&lt;/Placemark&gt;</span>	
+		<span class="nt">&lt;/Folder&gt;</span>
+	<span class="nt">&lt;/Document&gt;</span>
+<span class="nt">&lt;/kml&gt;</span>
 </code></pre>
+</div>
 
-<p>This may look a little scary, but never fear! See where the dual tags <code>&lt;LineString&gt;...&lt;/LineString&gt;</code>? <code>&lt;LineString&gt;</code> is basically synonymous with <em>line</em> and when Google Earth sees that it knows that the values between the <code>&lt;coordinates&gt;...&lt;/coordinates&gt;</code> tags should be read as a line.</p>
+<p>This may look a little scary, but never fear! See where the dual tags <code class="highlighter-rouge">&lt;LineString&gt;...&lt;/LineString&gt;</code>? <code class="highlighter-rouge">&lt;LineString&gt;</code> is basically synonymous with <em>line</em> and when Google Earth sees that it knows that the values between the <code class="highlighter-rouge">&lt;coordinates&gt;...&lt;/coordinates&gt;</code> tags should be read as a line.</p>
 
-<p>Now let’s look at what’s between <code>&lt;coordinates&gt;...&lt;/coordinates&gt;</code>. You should see a bunch of trios of comma-separated values. Those values represent the longitude, latitude, and altitude, respectively of each vertex in the parcel boundary. Notice that the first coordinate and last one are the same:</p>
+<p>Now let’s look at what’s between <code class="highlighter-rouge">&lt;coordinates&gt;...&lt;/coordinates&gt;</code>. You should see a bunch of trios of comma-separated values. Those values represent the longitude, latitude, and altitude, respectively of each vertex in the parcel boundary. Notice that the first coordinate and last one are the same:</p>
 
-<pre><code>&lt;coordinates&gt;-84.687180,38.198642,0 ... -84.687180,38.198642,0&lt;/coordinates&gt;'
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;coordinates&gt;-84.687180,38.198642,0 ... -84.687180,38.198642,0&lt;/coordinates&gt;'
 </code></pre>
+</div>
 
 <p>That those two coordinates are the same means we’re well set up to quickly turn this line. This leads us to our first method.</p>
 
@@ -198,7 +200,7 @@
       <li>Note: You may find when you navigate to the directory holding your KML file, it doesn’t show up. Sometimes programs will look for a default file format. There is a menu in your <em>Open</em> window that allows you to select which file type to filter for. Click that menu and select “All Files”<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/line2polygon/poly1_zpssk9mys6p.gif" alt="" /></li>
     </ul>
   </li>
-  <li>Replace <code>&lt;LineString&gt;</code> with <code>&lt;Polygon&gt;&lt;outerBoundaryIs&gt;&lt;LinearRing&gt;</code> as well as <code>&lt;/LineString&gt;</code> with <code>&lt;/LinearRing&gt;&lt;/outerBoundaryIs&gt;&lt;/Polygon&gt;</code><br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/line2polygon/poly2_zps9vlvuw9g.gif" alt="" /></li>
+  <li>Replace <code class="highlighter-rouge">&lt;LineString&gt;</code> with <code class="highlighter-rouge">&lt;Polygon&gt;&lt;outerBoundaryIs&gt;&lt;LinearRing&gt;</code> as well as <code class="highlighter-rouge">&lt;/LineString&gt;</code> with <code class="highlighter-rouge">&lt;/LinearRing&gt;&lt;/outerBoundaryIs&gt;&lt;/Polygon&gt;</code><br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/line2polygon/poly2_zps9vlvuw9g.gif" alt="" /></li>
   <li>Save. Your parcel boundary is now a polygon!</li>
 </ol>
 
@@ -211,8 +213,8 @@
   <li>Navigate to <em>Open&gt;File</em>. Click.</li>
   <li>The <em>Open</em> window opens up. Navigate to the directory where your parcel file is located, single-click the file, and click <strong>Open</strong>.</li>
   <li>Your parcel will be show in the left map pane. When you loaded your KML file, it was converted into GeoJSON. That’s the text you see in the right pane.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/line2polygon/poly4_zpsa6qlxzrj.jpg" alt="" /></li>
-  <li>Notice there is property <code>"type": "LineString"</code>. Change <code>"LineString"</code> to <code>"Polygon"</code>.You may see some little red warning symbols pop up next to the line numbers. We’ll address that next.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/line2polygon/poly5_zpsdnudeh48.gif" alt="" /></li>
-  <li>Add a <code>[</code> after <code>"coordinates": </code>, but before the first <code>[</code> already there. Add a closing <code>]</code> before the closing <code>}</code> prior to <code>"properties":...</code><br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/line2polygon/poly6_zps5rcaubps.gif" alt="" /></li>
+  <li>Notice there is property <code class="highlighter-rouge">"type": "LineString"</code>. Change <code class="highlighter-rouge">"LineString"</code> to <code class="highlighter-rouge">"Polygon"</code>.You may see some little red warning symbols pop up next to the line numbers. We’ll address that next.<br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/line2polygon/poly5_zpsdnudeh48.gif" alt="" /></li>
+  <li>Add a <code class="highlighter-rouge">[</code> after <code class="highlighter-rouge">"coordinates": </code>, but before the first <code class="highlighter-rouge">[</code> already there. Add a closing <code class="highlighter-rouge">]</code> before the closing <code class="highlighter-rouge">}</code> prior to <code class="highlighter-rouge">"properties":...</code><br /><img src="http://i1368.photobucket.com/albums/ag172/gscplanning/tutorials/line2polygon/poly6_zps5rcaubps.gif" alt="" /></li>
   <li>Your parcel is now a polygon! Navigate to Save and select the file format - GeoJSON, KML, or otherwise - you want to save your file as.</li>
 </ol>
 
